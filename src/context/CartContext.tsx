@@ -21,9 +21,8 @@ export const PRODUCTS: Product[] = [
     price: 5000,
     displayPrice: "Rp 5k",
     description: "Lumeran coklat premium dalam balutan kulit krispi yang gurih.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCTlSOyaDKYRbiSpJQULpnsNGU4DPEVgrHTOKbEg2LhzSqxB7DaMJz504spe4f1_91UVPe-raI2VEn-rSIBFzDqEyLV6s8XRjDSwsFTGd__37VqfcGu4T0_Z8YMIvmdIKljN1gVXI6a5GC4QsfvOLRH4dU9CfR1Kq5izEgFMaf2n_b35xtizcGBq5IQB7Ir1TeB8Je5ZpCwFa-hKlWs4BpSuwFAsWiqRPWFfqAaSqrAqIGOX4zYqepY6uf23GlKMMAwzEjHZtSg5NXt",
-    badge: "New",
+    image: "/images/risol_coklat.jpeg",
+    badge: "Baru",
     badgeColor: "bg-primary",
   },
   {
@@ -32,10 +31,9 @@ export const PRODUCTS: Product[] = [
     price: 6000,
     displayPrice: "Rp 6k",
     description:
-      "Mayonnaise creamy berpadu dengan smoked beef dan telur berkualitas.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBY8Ae08jgwQSGZxAnAsPs2XZbN5wFwpIOYYDNYNhGX5kKhCYFmFTthtJ0kxnWRmb6tBSSRVuNT6mHhl-ELyfH_2mmzKx0am54C6Si55AptzQ0rCQi9wBJwqqqsI032KjI6gP9bDhFeJkcB5StCh8O8oFN2XEKFTYHYhr38a9NvELv73b376q0ld0QILmFjmMINvsUK2jLqyCmYFz14ee5jDUvx2DkTEA66aAcSwdEy8pxjWskG_pKjnsVkcfTjuY8XJsMLgwab-Goq",
-    badge: "Bestseller",
+      "Perpaduan creamy mayonnaise, smoked beef, dan telur berkualitas pilihan.",
+    image: "/images/risol_mayo.jpeg",
+    badge: "Terlaris",
     badgeColor: "bg-secondary",
   },
   {
@@ -44,9 +42,8 @@ export const PRODUCTS: Product[] = [
     price: 7000,
     displayPrice: "Rp 7k",
     description:
-      "Saus mentai spesial yang di-torch sempurna untuk rasa smokey yang unik.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBhWgwbpbDkEK0ucH0lwBx1b9fc853REqrcS2T_jy1J6UAkL4C2MHq0qTAwYN271aIqO6NqfAUUYLMnc1Cd8YLZxvR8mVztK0nahXmkHoLS-rnJ8LVZ__TCFJ8L6MzNZJf02b4HpwrmzqwgW-HisNOtwpr91bgOVC4uE8vYdNATwfDk-lCEwio7taW6Ht6k1r2qo-bUsmcDTOoa7CS5KbRe5A60uQ8JwSFPEO6aJibHkIIJGJPmmw0LOaMvO0HbOTjh2iFIP_krDKb8",
+      "Dilumuri saus mentai spesial yang di-torch sempurna untuk rasa smokey unik.",
+    image: "/images/risol_mentai.jpeg",
   },
   {
     id: "risoles-matcha",
@@ -54,9 +51,8 @@ export const PRODUCTS: Product[] = [
     price: 6000,
     displayPrice: "Rp 6k",
     description:
-      "Rasa teh hijau Jepang yang otentik dalam balutan risoles manis.",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBLjEmomHpfCnNhY3-dLzGGzghgk0FownEyVD6gQ8wLfClALIYOARssRfj7RNUmB56TI0i36aui9czVgXGQ_oDGgOO3_BGggUygiWib42d1QSf0hJ1PpJh2g1xQw0yIkF-8ddfnF7Tr3oEamvKSOa5Ne2ecYXWQvvzykaSu191I4UUB8pvvilNAgf5jMwfiAGLMbb5kzbjytNv4XCPviHOsyOFcESdEsNI16vwL5d3ZELpEEcybkwO24QIG0rxW_ETw5BcGIQ6fIzke",
+      "Rasa teh hijau Jepang otentik yang dibalut balutan kulit manis dan renyah.",
+    image: "/images/risol_matcha.jpeg",
   },
 ];
 

@@ -3,14 +3,20 @@
 import { useCart } from "@/context/CartContext";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home" },
+  { label: "Beranda", href: "#home" },
   { label: "Menu", href: "#menu" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Partners", href: "#partners" },
+  { label: "Ulasan", href: "#reviews" },
 ];
 
 export default function Navbar() {
   const { totalItems } = useCart();
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
+  };
 
   return (
     <nav
@@ -45,8 +51,9 @@ export default function Navbar() {
 
         {/* Cart Icon */}
         <button
+          onClick={scrollToBottom}
           className="relative text-white hover:text-primary transition-all active:scale-90"
-          aria-label="Shopping Cart"
+          aria-label="Keranjang Belanja"
         >
           <span className="material-symbols-outlined text-2xl">
             shopping_cart

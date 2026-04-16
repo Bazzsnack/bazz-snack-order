@@ -23,12 +23,10 @@ export default function ProductSection() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <h2 className="font-headline font-extrabold text-4xl md:text-5xl tracking-tight mb-4 text-white">
-            Our Signature{" "}
-            <span className="text-primary italic">Risoles</span>
+            Menu Andalan <span className="text-primary italic">Risoles</span> Kami
           </h2>
           <p className="text-on-surface-variant max-w-lg">
-            Hand-crafted with the finest ingredients and our secret neon-pantry
-            recipes.
+            Dibuat langsung dengan bahan-bahan pilihan dan resep rahasia Bazz Snack yang bikin nagih.
           </p>
         </div>
 
