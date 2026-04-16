@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #ff8f70;
+  --color-primary-dim: #ff734c;
+  --color-primary-fixed: #ff7852;
+  --color-primary-fixed-dim: #ff5d2e;
+  --color-primary-container: #ff7852;
+  --color-on-primary: #5c1300;
+  --color-on-primary-fixed: #000000;
+  --color-on-primary-container: #480d00;
+  --color-on-primary-fixed-variant: #581200;
+
+  --color-secondary: #fd8b00;
+  --color-secondary-dim: #ed8200;
+  --color-secondary-fixed: #ffc69a;
+  --color-secondary-fixed-dim: #ffb375;
+  --color-secondary-container: #904d00;
+  --color-on-secondary: #442100;
+  --color-on-secondary-fixed: #532a00;
+  --color-on-secondary-fixed-variant: #7c4100;
+  --color-on-secondary-container: #fff6f1;
+
+  --color-tertiary: #eaa5ff;
+  --color-tertiary-dim: #d187e9;
+  --color-tertiary-fixed: #e094f8;
+  --color-tertiary-fixed-dim: #d187e9;
+  --color-tertiary-container: #e094f8;
+  --color-on-tertiary: #5d1877;
+  --color-on-tertiary-fixed: #2d003e;
+  --color-on-tertiary-fixed-variant: #5c1675;
+  --color-on-tertiary-container: #52076c;
+
+  --color-error: #ff716c;
+  --color-error-dim: #d7383b;
+  --color-error-container: #9f0519;
+  --color-on-error: #490006;
+  --color-on-error-container: #ffa8a3;
+
+  --color-surface: #0e0e0e;
+  --color-surface-dim: #0e0e0e;
+  --color-surface-bright: #2c2c2c;
+  --color-surface-tint: #ff8f70;
+  --color-surface-variant: #262626;
+  --color-surface-container: #1a1a1a;
+  --color-surface-container-low: #131313;
+  --color-surface-container-high: #20201f;
+  --color-surface-container-highest: #262626;
+  --color-surface-container-lowest: #000000;
+  --color-on-surface: #ffffff;
+  --color-on-surface-variant: #adaaaa;
+  --color-on-background: #ffffff;
+  --color-background: #0e0e0e;
+
+  --color-outline: #767575;
+  --color-outline-variant: #484847;
+
+  --color-inverse-surface: #fcf9f8;
+  --color-inverse-on-surface: #565555;
+  --color-inverse-primary: #b22e00;
+
+  --font-headline: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Custom Utilities */
+.liquid-fire {
+  background: linear-gradient(135deg, #ff7852 0%, #fd8b00 100%);
+}
+
+.glass-nav {
+  background: rgba(14, 14, 14, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.glass-dock {
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.snack-card-shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.active-glow {
+  box-shadow: 0 0 20px rgba(255, 143, 112, 0.2);
+}
+
+.ambient-shadow {
+  box-shadow: 0 20px 40px rgba(255, 115, 76, 0.15);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-container-highest);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
 }
