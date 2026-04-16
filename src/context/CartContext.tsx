@@ -18,8 +18,8 @@ export const PRODUCTS: Product[] = [
   {
     id: "risoles-coklat",
     name: "Risoles Coklat",
-    price: 5000,
-    displayPrice: "Rp 5k",
+    price: 3000,
+    displayPrice: "Rp 3k",
     description: "Lumeran coklat premium dalam balutan kulit krispi yang gurih.",
     image: "/images/risol_coklat.jpeg",
     badge: "Baru",
@@ -28,8 +28,8 @@ export const PRODUCTS: Product[] = [
   {
     id: "risoles-mayo",
     name: "Risoles Mayo",
-    price: 6000,
-    displayPrice: "Rp 6k",
+    price: 3000,
+    displayPrice: "Rp 3k",
     description:
       "Perpaduan creamy mayonnaise, smoked beef, dan telur berkualitas pilihan.",
     image: "/images/risol_mayo.jpeg",
@@ -39,8 +39,8 @@ export const PRODUCTS: Product[] = [
   {
     id: "risoles-mentai",
     name: "Risoles Mentai",
-    price: 7000,
-    displayPrice: "Rp 7k",
+    price: 3000,
+    displayPrice: "Rp 3k",
     description:
       "Dilumuri saus mentai spesial yang di-torch sempurna untuk rasa smokey unik.",
     image: "/images/risol_mentai.jpeg",
@@ -48,8 +48,8 @@ export const PRODUCTS: Product[] = [
   {
     id: "risoles-matcha",
     name: "Risoles Matcha",
-    price: 6000,
-    displayPrice: "Rp 6k",
+    price: 3000,
+    displayPrice: "Rp 3k",
     description:
       "Rasa teh hijau Jepang otentik yang dibalut balutan kulit manis dan renyah.",
     image: "/images/risol_matcha.jpeg",
@@ -57,8 +57,11 @@ export const PRODUCTS: Product[] = [
 ];
 
 // ─── Cart State Type ─────────────────────────────────────────────────────────
+export type VariantType = "ori" | "frozen";
+
 export type CartItem = {
   productId: string;
+  variant: VariantType;
   quantity: number;
 };
 
@@ -68,35 +71,35 @@ type CartState = {
 
 // ─── Actions ─────────────────────────────────────────────────────────────────
 type CartAction =
-  | { type: "INCREMENT"; productId: string }
-  | { type: "DECREMENT"; productId: string }
-  | { type: "ADD_TO_CART"; productId: string }
+  | { type: "INCREMENT"; productId: string; variant: VariantType }
+  | { type: "DECREMENT"; productId: string; variant: VariantType }
+  | { type: "ADD_TO_CART"; productId: string; variant: VariantType }
   | { type: "RESET" };
 
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "INCREMENT": {
       const exists = state.items.find(
-        (i) => i.productId === action.productId
+        (i) => i.productId === action.productId && i.variant === action.variant
       );
       if (exists) {
         return {
           items: state.items.map((i) =>
-            i.productId === action.productId
+            i.productId === action.productId && i.variant === action.variant
               ? { ...i, quantity: i.quantity + 1 }
               : i
           ),
         };
       }
       return {
-        items: [...state.items, { productId: action.productId, quantity: 1 }],
+        items: [...state.items, { productId: action.productId, variant: action.variant, quantity: 1 }],
       };
     }
     case "DECREMENT": {
       return {
         items: state.items
           .map((i) =>
-            i.productId === action.productId
+            i.productId === action.productId && i.variant === action.variant
               ? { ...i, quantity: i.quantity - 1 }
               : i
           )
@@ -105,19 +108,19 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     }
     case "ADD_TO_CART": {
       const exists = state.items.find(
-        (i) => i.productId === action.productId
+        (i) => i.productId === action.productId && i.variant === action.variant
       );
       if (exists) {
         return {
           items: state.items.map((i) =>
-            i.productId === action.productId
+            i.productId === action.productId && i.variant === action.variant
               ? { ...i, quantity: i.quantity + 1 }
               : i
           ),
         };
       }
       return {
-        items: [...state.items, { productId: action.productId, quantity: 1 }],
+        items: [...state.items, { productId: action.productId, variant: action.variant, quantity: 1 }],
       };
     }
     case "RESET":
@@ -132,10 +135,10 @@ type CartContextType = {
   items: CartItem[];
   totalItems: number;
   totalPrice: number;
-  getQuantity: (productId: string) => number;
-  increment: (productId: string) => void;
-  decrement: (productId: string) => void;
-  addToCart: (productId: string) => void;
+  getQuantity: (productId: string, variant: VariantType) => number;
+  increment: (productId: string, variant: VariantType) => void;
+  decrement: (productId: string, variant: VariantType) => void;
+  addToCart: (productId: string, variant: VariantType) => void;
   reset: () => void;
 };
 
@@ -155,14 +158,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       items: state.items,
       totalItems,
       totalPrice,
-      getQuantity: (productId: string) =>
-        state.items.find((i) => i.productId === productId)?.quantity ?? 0,
-      increment: (productId: string) =>
-        dispatch({ type: "INCREMENT", productId }),
-      decrement: (productId: string) =>
-        dispatch({ type: "DECREMENT", productId }),
-      addToCart: (productId: string) =>
-        dispatch({ type: "ADD_TO_CART", productId }),
+      getQuantity: (productId: string, variant: VariantType) =>
+        state.items.find((i) => i.productId === productId && i.variant === variant)?.quantity ?? 0,
+      increment: (productId: string, variant: VariantType) =>
+        dispatch({ type: "INCREMENT", productId, variant }),
+      decrement: (productId: string, variant: VariantType) =>
+        dispatch({ type: "DECREMENT", productId, variant }),
+      addToCart: (productId: string, variant: VariantType) =>
+        dispatch({ type: "ADD_TO_CART", productId, variant }),
       reset: () => dispatch({ type: "RESET" }),
     };
   }, [state.items]);
