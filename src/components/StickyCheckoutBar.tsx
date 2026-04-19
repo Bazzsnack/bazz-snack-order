@@ -3,7 +3,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { useCart, PRODUCTS } from "@/context/CartContext";
 
-const WA_NUMBER = "628XXXXXXXXXX"; // Replace with actual WhatsApp number
+const WA_NUMBER = "6285852590376";
+
+type DeliveryOption = "pickup" | "delivery";
 
 function formatRupiah(amount: number): string {
   return new Intl.NumberFormat("id-ID").format(amount);
@@ -60,6 +62,8 @@ export default function StickyCheckoutBar() {
     tanggal: "",
   });
 
+  const [deliveryOption, setDeliveryOption] = useState<DeliveryOption>("pickup");
+
   // Real-time min date — recalculates every minute to detect cutoff live
   const [minDateInfo, setMinDateInfo] = useState(() => getMinOrderDate());
 
@@ -81,6 +85,13 @@ export default function StickyCheckoutBar() {
     return () => clearInterval(interval);
   }, [refreshMinDate]);
 
+  // Clear alamat when switching to pickup
+  useEffect(() => {
+    if (deliveryOption === "pickup") {
+      setFormData((prev) => ({ ...prev, alamat: "" }));
+    }
+  }, [deliveryOption]);
+
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -98,19 +109,31 @@ export default function StickyCheckoutBar() {
       ? formatTanggalIndo(formData.tanggal)
       : "-";
 
+    const pengirimanInfo =
+      deliveryOption === "pickup"
+        ? "🏪 Ambil di Tempat"
+        : `🚚 Diantar\nAlamat: ${formData.alamat}`;
+
+    const ongkirNote =
+      deliveryOption === "delivery"
+        ? "\n\n⚠️ *Harga belum termasuk ongkir (akan dikonfirmasi via chat)*"
+        : "";
+
     const message = `Halo Bazz Snack! Saya mau order:
 
 Rincian Pesanan:
 ${orderLines}
 
-Total Belanja: Rp ${formatRupiah(totalPrice)}
+Total Belanja: Rp ${formatRupiah(totalPrice)}${ongkirNote}
 
 📅 Tanggal Pesanan: ${tanggalFormatted}
 
-Data Penerima:
+Data Pemesan:
 Nama: ${formData.nama}
 Nomor HP: ${formData.nomor || "-"}
-Alamat / Titik Jemput: ${formData.alamat}`;
+
+Metode Pengambilan:
+${pengirimanInfo}`;
 
     const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, "_blank");
@@ -163,7 +186,7 @@ Alamat / Titik Jemput: ${formData.alamat}`;
             {/* Modal Header */}
             <h2 className="font-headline text-2xl font-bold mb-2">Checkout</h2>
             <p className="text-sm text-on-surface-variant mb-6 border-b border-outline-variant/10 pb-4">
-              Isi data pengiriman/penjemputan di bawah untuk lanjut memproses pesanan ke WhatsApp admin.
+              Isi data berikut untuk lanjut memproses pesanan ke WhatsApp admin.
             </p>
 
             {/* Form */}
@@ -206,7 +229,7 @@ Alamat / Titik Jemput: ${formData.alamat}`;
                 <input
                   required
                   type="text"
-                  placeholder="Budi Gunawan"
+                  placeholder="Nama lengkap"
                   value={formData.nama}
                   onChange={(e) => setFormData({ ...formData, nama: e.target.value })}
                   className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-white"
@@ -226,18 +249,113 @@ Alamat / Titik Jemput: ${formData.alamat}`;
                 />
               </div>
 
-              <div className="flex flex-col gap-1.5 mb-2">
+              {/* ── Metode Pengambilan ── */}
+              <div className="flex flex-col gap-2.5 mb-1">
                 <label className="text-xs font-bold text-primary uppercase tracking-widest">
-                  Alamat / Titik Jemput <span className="text-error">*</span>
+                  Metode Pengambilan <span className="text-error">*</span>
                 </label>
-                <textarea
-                  required
-                  rows={3}
-                  placeholder="Alamat lengkap / Titik temu (Kantin, dll)"
-                  value={formData.alamat}
-                  onChange={(e) => setFormData({ ...formData, alamat: e.target.value })}
-                  className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl resize-none focus:border-primary focus:outline-none transition-colors text-white"
-                />
+
+                <div className="grid grid-cols-2 gap-3">
+                  {/* Option 1: Pickup */}
+                  <button
+                    type="button"
+                    onClick={() => setDeliveryOption("pickup")}
+                    className={`relative flex flex-col items-center gap-2.5 p-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer group ${
+                      deliveryOption === "pickup"
+                        ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(255,120,82,0.15)]"
+                        : "border-outline-variant/20 bg-surface-container-highest hover:border-outline-variant/40"
+                    }`}
+                  >
+                    {deliveryOption === "pickup" && (
+                      <span className="absolute top-2 right-2 material-symbols-outlined text-primary text-base">
+                        check_circle
+                      </span>
+                    )}
+                    <span
+                      className={`material-symbols-outlined text-2xl transition-colors ${
+                        deliveryOption === "pickup"
+                          ? "text-primary"
+                          : "text-on-surface-variant group-hover:text-primary"
+                      }`}
+                    >
+                      storefront
+                    </span>
+                    <div className="text-center">
+                      <p
+                        className={`text-sm font-bold transition-colors ${
+                          deliveryOption === "pickup" ? "text-white" : "text-on-surface-variant"
+                        }`}
+                      >
+                        Ambil di Tempat
+                      </p>
+                      <p className="text-[11px] text-green-400 font-semibold mt-0.5">
+                        Gratis
+                      </p>
+                    </div>
+                  </button>
+
+                  {/* Option 2: Delivery */}
+                  <button
+                    type="button"
+                    onClick={() => setDeliveryOption("delivery")}
+                    className={`relative flex flex-col items-center gap-2.5 p-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer group ${
+                      deliveryOption === "delivery"
+                        ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(255,120,82,0.15)]"
+                        : "border-outline-variant/20 bg-surface-container-highest hover:border-outline-variant/40"
+                    }`}
+                  >
+                    {deliveryOption === "delivery" && (
+                      <span className="absolute top-2 right-2 material-symbols-outlined text-primary text-base">
+                        check_circle
+                      </span>
+                    )}
+                    <span
+                      className={`material-symbols-outlined text-2xl transition-colors ${
+                        deliveryOption === "delivery"
+                          ? "text-primary"
+                          : "text-on-surface-variant group-hover:text-primary"
+                      }`}
+                    >
+                      local_shipping
+                    </span>
+                    <div className="text-center">
+                      <p
+                        className={`text-sm font-bold transition-colors ${
+                          deliveryOption === "delivery" ? "text-white" : "text-on-surface-variant"
+                        }`}
+                      >
+                        Diantar
+                      </p>
+                      <p className="text-[11px] text-secondary font-semibold mt-0.5">
+                        + Ongkir
+                      </p>
+                    </div>
+                  </button>
+                </div>
+
+                {/* Address field — only visible when Delivery is selected */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-out ${
+                    deliveryOption === "delivery"
+                      ? "max-h-[200px] opacity-100 mt-1"
+                      : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <textarea
+                    required={deliveryOption === "delivery"}
+                    rows={3}
+                    placeholder="Alamat lengkap pengiriman"
+                    value={formData.alamat}
+                    onChange={(e) =>
+                      setFormData({ ...formData, alamat: e.target.value })
+                    }
+                    className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl resize-none focus:border-primary focus:outline-none transition-colors text-white"
+                  />
+                  <span className="text-[11px] text-secondary flex items-center gap-1 mt-1">
+                    <span className="material-symbols-outlined text-secondary text-sm">info</span>
+                    Ongkir akan dikonfirmasi via WhatsApp
+                  </span>
+                </div>
               </div>
 
               {/* Order Details Preview */}
@@ -245,6 +363,11 @@ Alamat / Titik Jemput: ${formData.alamat}`;
                 <div className="flex flex-col">
                   <span className="text-xs text-gray-400">Total {totalItems} items</span>
                   <span className="font-bold text-lg text-primary">Rp {formatRupiah(totalPrice)}</span>
+                  {deliveryOption === "delivery" && (
+                    <span className="text-[10px] text-secondary font-medium mt-0.5">
+                      * belum termasuk ongkir
+                    </span>
+                  )}
                 </div>
                 {formData.tanggal && (
                   <div className="flex items-center gap-1.5 text-right">
