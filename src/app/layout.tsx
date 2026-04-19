@@ -40,6 +40,15 @@ export const metadata: Metadata = {
       "Nikmati berbagai varian risoles premium dari Bazz Snack. Langsung siap antar!",
     type: "website",
     locale: "id_ID",
+    url: "https://bazz-snack.vercel.app",
+    images: [
+      {
+        url: "https://bazz-snack.vercel.app/images/og_preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Preview Bazz Snack",
+      },
+    ],
   },
 };
 
