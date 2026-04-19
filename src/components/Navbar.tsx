@@ -23,7 +23,7 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#home"
-          className="relative block w-40 h-12 transition-transform hover:scale-105 active:scale-95 drop-shadow-[0_4px_12px_rgba(255,143,112,0.35)]"
+          className="relative block w-48 sm:w-56 h-14 sm:h-16 transition-transform hover:scale-105 active:scale-95 drop-shadow-[0_4px_12px_rgba(255,143,112,0.35)]"
         >
           <Image
             src="/images/logo_bazzsnack.jpeg"
