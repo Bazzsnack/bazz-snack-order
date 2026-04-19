@@ -23,7 +23,7 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#home"
-          className="relative flex items-center w-56 sm:w-72 h-20 origin-left scale-125 sm:scale-150 transition-transform active:scale-95 drop-shadow-[0_0_15px_rgba(255,143,112,0.6)]"
+          className="relative flex items-center w-48 sm:w-64 h-16 origin-left scale-110 sm:scale-125 transition-transform active:scale-95 drop-shadow-[0_0_15px_rgba(255,143,112,0.6)]"
         >
           <Image
             src="/images/logo_bazzsnack.jpeg"
