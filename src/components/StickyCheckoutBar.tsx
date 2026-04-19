@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useCart, PRODUCTS } from "@/context/CartContext";
 
 const WA_NUMBER = "628XXXXXXXXXX"; // Replace with actual WhatsApp number
@@ -9,20 +9,46 @@ function formatRupiah(amount: number): string {
   return new Intl.NumberFormat("id-ID").format(amount);
 }
 
+/**
+ * Returns tomorrow's date as YYYY-MM-DD string (H-1 minimum).
+ */
+function getTomorrowDate(): string {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow.toISOString().split("T")[0];
+}
+
+/**
+ * Format a YYYY-MM-DD date string to a human-readable Indonesian format.
+ * e.g. "2026-04-20" → "Minggu, 20 April 2026"
+ */
+function formatTanggalIndo(dateStr: string): string {
+  const date = new Date(dateStr + "T00:00:00");
+  return date.toLocaleDateString("id-ID", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 export default function StickyCheckoutBar() {
   const { items, totalItems, totalPrice } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
+  const minDate = useMemo(() => getTomorrowDate(), []);
+
   // Checkout Form State
   const [formData, setFormData] = useState({
     nama: "",
     nomor: "",
     alamat: "",
+    tanggal: "",
   });
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Build message lines — only include items with qty > 0
     const orderLines = items
       .filter((item) => item.quantity > 0)
@@ -33,12 +59,18 @@ export default function StickyCheckoutBar() {
       })
       .join("\n");
 
+    const tanggalFormatted = formData.tanggal
+      ? formatTanggalIndo(formData.tanggal)
+      : "-";
+
     const message = `Halo Bazz Snack! Saya mau order:
 
 Rincian Pesanan:
 ${orderLines}
 
 Total Belanja: Rp ${formatRupiah(totalPrice)}
+
+📅 Tanggal Pesanan: ${tanggalFormatted}
 
 Data Penerima:
 Nama: ${formData.nama}
@@ -84,7 +116,7 @@ Alamat / Titik Jemput: ${formData.alamat}`;
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
           <div className="bg-surface-container-low border border-outline-variant/15 w-full max-w-md p-6 rounded-[2rem] shadow-2xl relative animate-slide-up overflow-y-auto max-h-[90vh]">
-            
+
             {/* Close Button */}
             <button
               onClick={() => setIsModalOpen(false)}
@@ -101,7 +133,30 @@ Alamat / Titik Jemput: ${formData.alamat}`;
 
             {/* Form */}
             <form onSubmit={handleCheckout} className="flex flex-col gap-4">
-              
+
+              {/* Tanggal Pesanan — prominent placement */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-bold text-primary uppercase tracking-widest">
+                  Tanggal Pesanan <span className="text-error">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    required
+                    type="date"
+                    min={minDate}
+                    value={formData.tanggal}
+                    onChange={(e) =>
+                      setFormData({ ...formData, tanggal: e.target.value })
+                    }
+                    className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-white appearance-none [color-scheme:dark]"
+                  />
+                </div>
+                <span className="text-[11px] text-on-surface-variant flex items-center gap-1">
+                  <span className="material-symbols-outlined text-secondary text-sm">info</span>
+                  Pre-order minimal H-1 (besok atau setelahnya)
+                </span>
+              </div>
+
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-bold text-primary uppercase tracking-widest">
                   Nama Pemesan <span className="text-error">*</span>
@@ -149,6 +204,16 @@ Alamat / Titik Jemput: ${formData.alamat}`;
                   <span className="text-xs text-gray-400">Total {totalItems} items</span>
                   <span className="font-bold text-lg text-primary">Rp {formatRupiah(totalPrice)}</span>
                 </div>
+                {formData.tanggal && (
+                  <div className="flex items-center gap-1.5 text-right">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-gray-400 uppercase tracking-widest">Untuk tanggal</span>
+                      <span className="text-xs font-bold text-secondary">
+                        {formatTanggalIndo(formData.tanggal)}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Submit / WhatsApp Redirect */}
