@@ -43,7 +43,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     PRODUCTS.find((p) => p.id === productId);
 
   const getVariantLabel = (variant: VariantType) =>
-    variant === "ori" ? "Ori (Siap Makan)" : "Frozen";
+    variant === "ori" ? "Original" : "Frozen";
 
   const getVariantColor = (variant: VariantType) =>
     variant === "ori" ? "text-primary" : "text-secondary";

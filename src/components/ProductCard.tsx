@@ -59,7 +59,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                   : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
               }`}
             >
-              Ori (Siap Makan)
+              Original
             </button>
             <button
               onClick={() => setSelectedVariant("frozen")}

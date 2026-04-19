@@ -28,7 +28,7 @@ export default function StickyCheckoutBar() {
       .filter((item) => item.quantity > 0)
       .map((item) => {
         const product = PRODUCTS.find((p) => p.id === item.productId);
-        const variantLabel = item.variant === "ori" ? "Ori (Siap Makan)" : "Frozen";
+        const variantLabel = item.variant === "ori" ? "Original" : "Frozen";
         return `- ${item.quantity}x ${product?.name ?? item.productId} (${variantLabel})`;
       })
       .join("\n");
