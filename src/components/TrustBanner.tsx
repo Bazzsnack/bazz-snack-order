@@ -1,14 +1,14 @@
 export default function TrustBanner() {
   const BADGES = [
     {
-      icon: "local_fire_department",
-      title: "Digoreng Dadakan",
-      subtitle: "Selalu fresh setiap hari",
+      icon: "savings",
+      title: "Harga Ramah di Kantong",
+      subtitle: "Sangat pas untuk pelajar dan kawula muda",
     },
     {
-      icon: "workspace_premium",
-      title: "Bahan Premium",
-      subtitle: "Kualitas rasa tanpa kompromi",
+      icon: "restaurant_menu",
+      title: "Rasa Enak & Variatif",
+      subtitle: "Banyak pilihan isian yang bikin nagih",
     },
   ];
 
