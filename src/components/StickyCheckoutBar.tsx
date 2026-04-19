@@ -60,6 +60,7 @@ export default function StickyCheckoutBar() {
     nomor: "",
     alamat: "",
     tanggal: "",
+    catatan: "",
   });
 
   const [deliveryOption, setDeliveryOption] = useState<DeliveryOption>("pickup");
@@ -133,7 +134,7 @@ Nama: ${formData.nama}
 Nomor HP: ${formData.nomor || "-"}
 
 Metode Pengambilan:
-${pengirimanInfo}`;
+${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` : ""}`;
 
     const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, "_blank");
@@ -356,6 +357,22 @@ ${pengirimanInfo}`;
                     Ongkir akan dikonfirmasi via WhatsApp
                   </span>
                 </div>
+              </div>
+
+              {/* Catatan / Note */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  Catatan <span className="text-[10px] lowercase normal-case text-gray-500 font-normal">(Opsional)</span>
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="Contoh: minta saus extra, jangan pedas, dll"
+                  value={formData.catatan}
+                  onChange={(e) =>
+                    setFormData({ ...formData, catatan: e.target.value })
+                  }
+                  className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl resize-none focus:border-primary focus:outline-none transition-colors text-white"
+                />
               </div>
 
               {/* Order Details Preview */}
