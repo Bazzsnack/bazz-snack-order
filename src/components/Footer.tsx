@@ -14,7 +14,7 @@ export default function Footer() {
               Bazz Snack
             </h3>
             <p className="text-sm text-on-surface-variant leading-relaxed max-w-xs">
-              Pusat snack kekinian dengan cita rasa premium. Dipercaya ratusan pelanggan sejak 2024.
+              Pusat snack kekinian dengan cita rasa premium. Dipercaya ratusan pelanggan sejak 2026.
             </p>
           </div>
 
@@ -36,7 +36,6 @@ export default function Footer() {
           {/* Sosial Media */}
           <div className="flex flex-col gap-3">
             <h4 className="text-xs font-bold text-primary uppercase tracking-widest flex items-center gap-2">
-              <span className="material-symbols-outlined text-base">share</span>
               Ikuti Kami
             </h4>
             <a
@@ -69,7 +68,7 @@ export default function Footer() {
         {/* Bottom — Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
           <p className="text-xs text-on-surface-variant/60 font-body">
-            © 2024 Bazz Snack. Pusat Snack Kekinian
+            © 2026 Bazz Snack. Pusat Snack Kekinian
           </p>
         </div>
       </div>
