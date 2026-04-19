@@ -19,6 +19,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
   title: "Bazz Snack — Pusat Jajanan Kekinian",
   description:
     "Pesan risoles kekinian dari Bazz Snack. Tersedia varian Coklat Lumer, Mayo, Mentai, dan Matcha. Rasakan cita rasa premium yang bikin nagih!",
