@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { useCartSidebar } from "@/context/CartSidebarContext";
 
@@ -22,9 +23,15 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#home"
-          className="text-2xl font-bold tracking-tighter text-primary"
+          className="relative block w-32 h-10 transition-transform active:scale-95"
         >
-          Bazz Snack
+          <Image
+            src="/images/logo_bazzsnack.jpeg"
+            alt="Bazz Snack Logo"
+            fill
+            className="object-contain object-left"
+            priority
+          />
         </a>
 
         {/* Desktop Nav Links */}
