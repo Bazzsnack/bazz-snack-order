@@ -19,9 +19,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Bazz Snack — The Modern Snack Hub | Premium Risoles",
+  title: "Bazz Snack — Pusat Jajanan Kekinian",
   description:
-    "Order premium risoles online from Bazz Snack. Coklat, Mayo, Mentai, and Matcha flavors. Trusted by 200+ community members. Fast WhatsApp ordering.",
+    "Pesan risoles kekinian dari Bazz Snack. Tersedia varian Coklat Lumer, Mayo, Mentai, dan Matcha. Rasakan cita rasa premium yang bikin nagih!",
   keywords: [
     "bazz snack",
     "risoles",
@@ -29,16 +29,25 @@ export const metadata: Metadata = {
     "risoles mayo",
     "risoles mentai",
     "risoles matcha",
-    "snack premium",
+    "snack kekinian",
     "order online",
-    "whatsapp order",
+    "jajanan mojokerto",
   ],
   openGraph: {
-    title: "Bazz Snack — The Modern Snack Hub",
+    title: "Bazz Snack — Pusat Jajanan Kekinian",
     description:
-      "Premium editorial street food. Order risoles online via WhatsApp.",
+      "Nikmati berbagai varian risoles premium dari Bazz Snack. Langsung siap antar!",
     type: "website",
     locale: "id_ID",
+    url: "https://bazzsnack.com", // Assuming or placeholder, helps SEO
+    images: [
+      {
+        url: "/images/logo_bazzsnack.jpeg", // Features the logo on link share
+        width: 800,
+        height: 600,
+        alt: "Logo Bazz Snack",
+      },
+    ],
   },
 };
 
