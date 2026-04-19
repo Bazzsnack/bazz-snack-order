@@ -40,15 +40,6 @@ export const metadata: Metadata = {
       "Nikmati berbagai varian risoles premium dari Bazz Snack. Langsung siap antar!",
     type: "website",
     locale: "id_ID",
-    url: "https://bazzsnack.com", // Assuming or placeholder, helps SEO
-    images: [
-      {
-        url: "/images/og_preview.png", // Features the website preview on link share
-        width: 1200,
-        height: 630,
-        alt: "Preview Bazz Snack Web",
-      },
-    ],
   },
 };
 
