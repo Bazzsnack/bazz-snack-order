@@ -23,7 +23,7 @@ export default function HeroSection() {
           <h1 className="font-headline font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.9]">
             Pusat{" "}
             <span className="text-transparent bg-clip-text liquid-fire">
-              Risoles
+              Jajanan
             </span>
             <br />
             Kekinian
@@ -31,7 +31,7 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-on-surface-variant text-lg md:text-xl max-w-md leading-relaxed">
-            Pusat jajanan kekinian yang dipercaya ratusan pelanggan. Nikmati berbagai pilihan risoles lezat yang siap diantar ke tempatmu.
+            Selamat datang di Bazz Snack! Nikmati ragam pilihan jajanan kekinian lezat yang siap memanjakan lidahmu. Terbukti memuaskan ratusan pelanggan selama lebih dari 3 tahun !
           </p>
 
           {/* CTAs */}
