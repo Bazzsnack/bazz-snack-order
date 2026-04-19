@@ -23,13 +23,13 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#home"
-          className="relative block w-48 sm:w-56 h-14 sm:h-16 transition-transform hover:scale-105 active:scale-95 drop-shadow-[0_4px_12px_rgba(255,143,112,0.35)]"
+          className="relative flex items-center w-56 sm:w-72 h-20 origin-left scale-125 sm:scale-150 transition-transform active:scale-95 drop-shadow-[0_0_15px_rgba(255,143,112,0.6)]"
         >
           <Image
             src="/images/logo_bazzsnack.jpeg"
             alt="Bazz Snack Logo"
             fill
-            className="object-contain object-left"
+            className="object-contain object-left mix-blend-screen"
             priority
           />
         </a>
