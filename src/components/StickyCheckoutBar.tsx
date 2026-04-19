@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useCart, PRODUCTS } from "@/context/CartContext";
 
 const WA_NUMBER = "628XXXXXXXXXX"; // Replace with actual WhatsApp number
@@ -9,13 +9,29 @@ function formatRupiah(amount: number): string {
   return new Intl.NumberFormat("id-ID").format(amount);
 }
 
+const ORDER_CUTOFF_HOUR = 12; // Batas order jam 12 siang WIB
+
 /**
- * Returns tomorrow's date as YYYY-MM-DD string (H-1 minimum).
+ * Returns the earliest orderable date based on current time.
+ * - Before 12:00 PM → tomorrow (H-1)
+ * - After 12:00 PM  → day after tomorrow (H-2), tomorrow is closed
  */
-function getTomorrowDate(): string {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow.toISOString().split("T")[0];
+function getMinOrderDate(): { dateStr: string; isCutoff: boolean } {
+  const now = new Date();
+  const currentHour = now.getHours();
+  const isPastCutoff = currentHour >= ORDER_CUTOFF_HOUR;
+
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + (isPastCutoff ? 2 : 1));
+
+  const yyyy = minDate.getFullYear();
+  const mm = String(minDate.getMonth() + 1).padStart(2, "0");
+  const dd = String(minDate.getDate()).padStart(2, "0");
+
+  return {
+    dateStr: `${yyyy}-${mm}-${dd}`,
+    isCutoff: isPastCutoff,
+  };
 }
 
 /**
@@ -36,8 +52,6 @@ export default function StickyCheckoutBar() {
   const { items, totalItems, totalPrice } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const minDate = useMemo(() => getTomorrowDate(), []);
-
   // Checkout Form State
   const [formData, setFormData] = useState({
     nama: "",
@@ -45,6 +59,27 @@ export default function StickyCheckoutBar() {
     alamat: "",
     tanggal: "",
   });
+
+  // Real-time min date — recalculates every minute to detect cutoff live
+  const [minDateInfo, setMinDateInfo] = useState(() => getMinOrderDate());
+
+  const refreshMinDate = useCallback(() => {
+    const info = getMinOrderDate();
+    setMinDateInfo(info);
+    // If the user already picked a date that's now invalid, clear it
+    setFormData((prev) => {
+      if (prev.tanggal && prev.tanggal < info.dateStr) {
+        return { ...prev, tanggal: "" };
+      }
+      return prev;
+    });
+  }, []);
+
+  useEffect(() => {
+    refreshMinDate();
+    const interval = setInterval(refreshMinDate, 60_000); // check every minute
+    return () => clearInterval(interval);
+  }, [refreshMinDate]);
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,7 +178,7 @@ Alamat / Titik Jemput: ${formData.alamat}`;
                   <input
                     required
                     type="date"
-                    min={minDate}
+                    min={minDateInfo.dateStr}
                     value={formData.tanggal}
                     onChange={(e) =>
                       setFormData({ ...formData, tanggal: e.target.value })
@@ -151,10 +186,17 @@ Alamat / Titik Jemput: ${formData.alamat}`;
                     className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-white appearance-none [color-scheme:dark]"
                   />
                 </div>
-                <span className="text-[11px] text-on-surface-variant flex items-center gap-1">
-                  <span className="material-symbols-outlined text-secondary text-sm">info</span>
-                  Pre-order minimal H-1 (besok atau setelahnya)
-                </span>
+                {minDateInfo.isCutoff ? (
+                  <span className="text-[11px] text-secondary flex items-center gap-1">
+                    <span className="material-symbols-outlined text-secondary text-sm">schedule</span>
+                    Order untuk besok sudah ditutup (lewat jam 12 siang). Pesanan mulai dari lusa.
+                  </span>
+                ) : (
+                  <span className="text-[11px] text-on-surface-variant flex items-center gap-1">
+                    <span className="material-symbols-outlined text-secondary text-sm">info</span>
+                    Pre-order minimal H-1, batas order jam 12:00 siang
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col gap-1.5">
