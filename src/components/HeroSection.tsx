@@ -31,7 +31,7 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-on-surface-variant text-lg md:text-xl max-w-md leading-relaxed">
-            Dipercaya selama 3 tahun oleh ratusan pelanggan. Jajanan premium dengan cita rasa otentik yang siap diantar ke tempatmu.
+            Pusat jajanan kekinian yang dipercaya ratusan pelanggan. Nikmati berbagai pilihan risoles lezat yang siap diantar ke tempatmu.
           </p>
 
           {/* CTAs */}
