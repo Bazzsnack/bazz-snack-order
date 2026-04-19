@@ -42,10 +42,10 @@ export const metadata: Metadata = {
     url: "https://bazzsnack.com", // Assuming or placeholder, helps SEO
     images: [
       {
-        url: "/images/logo_bazzsnack.jpeg", // Features the logo on link share
-        width: 800,
-        height: 600,
-        alt: "Logo Bazz Snack",
+        url: "/images/og_preview.png", // Features the website preview on link share
+        width: 1200,
+        height: 630,
+        alt: "Preview Bazz Snack Web",
       },
     ],
   },
