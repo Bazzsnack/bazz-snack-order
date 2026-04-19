@@ -54,7 +54,7 @@ export default function HeroSection() {
         {/* Right Hero Image */}
         <div className="relative hidden lg:block">
           {/* Image Card */}
-          <div className="relative rounded-[2rem] overflow-hidden aspect-square rotate-3 border-4 border-surface-container-highest">
+          <div className="relative rounded-[2rem] overflow-hidden aspect-square border-4 border-surface-container-highest animate-float-hero">
             <Image
               src="/images/risol_coklat.jpeg"
               alt="Signature Risoles"
