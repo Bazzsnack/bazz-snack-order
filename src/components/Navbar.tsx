@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
+import { useCartSidebar } from "@/context/CartSidebarContext";
 
 const NAV_LINKS = [
   { label: "Beranda", href: "#home" },
@@ -10,13 +11,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const { totalItems } = useCart();
-
-  const scrollToBottom = () => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
-  };
+  const { openSidebar } = useCartSidebar();
 
   return (
     <nav
@@ -51,8 +46,8 @@ export default function Navbar() {
 
         {/* Cart Icon */}
         <button
-          onClick={scrollToBottom}
-          className="relative text-white hover:text-primary transition-all active:scale-90"
+          onClick={openSidebar}
+          className="relative text-white hover:text-primary transition-all active:scale-90 cursor-pointer"
           aria-label="Keranjang Belanja"
         >
           <span className="material-symbols-outlined text-2xl">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Manrope } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
+import { CartSidebarProvider } from "@/context/CartSidebarContext";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -58,7 +59,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+          <CartSidebarProvider>{children}</CartSidebarProvider>
+        </CartProvider>
       </body>
     </html>
   );

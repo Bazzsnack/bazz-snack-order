@@ -1,24 +1,26 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
+import { useCartSidebar } from "@/context/CartSidebarContext";
 
 const NAV_ITEMS = [
   { icon: "home", label: "Beranda", href: "#home", active: true },
   { icon: "fastfood", label: "Menu", href: "#menu", active: false },
   { icon: "shopping_bag", label: "Keranjang", href: "#", active: false },
-  { icon: "person", label: "Akun", href: "#", active: false },
+  { icon: "star", label: "Ulasan", href: "#reviews", active: false },
 ];
 
 export default function MobileNav() {
   const { totalItems } = useCart();
+  const { openSidebar } = useCartSidebar();
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, label: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    label: string
+  ) => {
     if (label === "Keranjang") {
       e.preventDefault();
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
-      });
+      openSidebar();
     }
   };
 

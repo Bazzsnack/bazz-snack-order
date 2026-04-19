@@ -66,7 +66,7 @@ export default function HeroSection() {
           </div>
 
           {/* Testimonial Card */}
-          <div id="reviews" className="absolute -bottom-10 -left-10 bg-surface-container-high/80 backdrop-blur-xl p-6 rounded-2xl border border-outline-variant/15 shadow-2xl max-w-xs animate-float">
+          <div className="absolute -bottom-10 -left-10 bg-surface-container-high/80 backdrop-blur-xl p-6 rounded-2xl border border-outline-variant/15 shadow-2xl max-w-xs animate-float">
             <p className="text-sm font-label text-secondary-fixed mb-2 italic">
               &ldquo;Risoles paling enak di kota ini. Titik.&rdquo;
             </p>
