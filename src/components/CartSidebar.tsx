@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { useCart, PRODUCTS, type VariantType } from "@/context/CartContext";
+import { useCart, PRODUCTS, FROZEN_MIN_QTY, type VariantType } from "@/context/CartContext";
 
 function formatRupiah(amount: number): string {
   return new Intl.NumberFormat("id-ID").format(amount);
@@ -140,13 +140,20 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       <h4 className="font-headline font-bold text-sm truncate">
                         {product.name}
                       </h4>
-                      <span
-                        className={`text-[10px] font-label font-bold uppercase tracking-widest ${getVariantColor(
-                          item.variant
-                        )}`}
-                      >
-                        {getVariantLabel(item.variant)}
-                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <span
+                          className={`text-[10px] font-label font-bold uppercase tracking-widest ${getVariantColor(
+                            item.variant
+                          )}`}
+                        >
+                          {getVariantLabel(item.variant)}
+                        </span>
+                        {item.variant === "frozen" && (
+                          <span className="text-[9px] bg-secondary/15 text-secondary px-1.5 py-0.5 rounded font-medium">
+                            Min. {FROZEN_MIN_QTY}
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Quantity + Price Row */}
@@ -160,8 +167,8 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                           className="w-7 h-7 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
                           aria-label={`Kurangi ${product.name}`}
                         >
-                          <span className="material-symbols-outlined text-sm">
-                            remove
+                          <span className="material-symbols-outlined text-sm" title={item.variant === "frozen" && item.quantity === FROZEN_MIN_QTY ? "Hapus dari keranjang" : "Kurangi"}>
+                            {item.variant === "frozen" && item.quantity === FROZEN_MIN_QTY ? "delete" : "remove"}
                           </span>
                         </button>
                         <span className="w-6 text-center text-xs font-bold tabular-nums">

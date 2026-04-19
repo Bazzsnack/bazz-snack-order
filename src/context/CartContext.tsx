@@ -2,6 +2,10 @@
 
 import React, { createContext, useContext, useReducer, useMemo } from "react";
 
+// ─── Constants ───────────────────────────────────────────────────────────────
+export const FROZEN_MIN_QTY = 5;
+export const FROZEN_PRICE = 3000; // same per-piece price, but min 5 = 15k
+
 // ─── Product Data ────────────────────────────────────────────────────────────
 export type Product = {
   id: string;
@@ -91,8 +95,13 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           ),
         };
       }
+      // First add — frozen starts at FROZEN_MIN_QTY, ori starts at 1
+      const startQty = action.variant === "frozen" ? FROZEN_MIN_QTY : 1;
       return {
-        items: [...state.items, { productId: action.productId, variant: action.variant, quantity: 1 }],
+        items: [
+          ...state.items,
+          { productId: action.productId, variant: action.variant, quantity: startQty },
+        ],
       };
     }
     case "DECREMENT": {
@@ -103,7 +112,11 @@ function cartReducer(state: CartState, action: CartAction): CartState {
               ? { ...i, quantity: i.quantity - 1 }
               : i
           )
-          .filter((i) => i.quantity > 0),
+          // Frozen items get removed if they drop below min qty; ori removed at 0
+          .filter((i) => {
+            if (i.variant === "frozen") return i.quantity >= FROZEN_MIN_QTY;
+            return i.quantity > 0;
+          }),
       };
     }
     case "ADD_TO_CART": {
@@ -111,6 +124,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         (i) => i.productId === action.productId && i.variant === action.variant
       );
       if (exists) {
+        // For frozen, increment by 1 if already at/above min
         return {
           items: state.items.map((i) =>
             i.productId === action.productId && i.variant === action.variant
@@ -119,8 +133,13 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           ),
         };
       }
+      // First add — frozen starts at FROZEN_MIN_QTY
+      const startQty = action.variant === "frozen" ? FROZEN_MIN_QTY : 1;
       return {
-        items: [...state.items, { productId: action.productId, variant: action.variant, quantity: 1 }],
+        items: [
+          ...state.items,
+          { productId: action.productId, variant: action.variant, quantity: startQty },
+        ],
       };
     }
     case "RESET":
