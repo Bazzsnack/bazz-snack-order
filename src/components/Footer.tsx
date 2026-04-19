@@ -14,7 +14,7 @@ export default function Footer() {
               Bazz Snack
             </h3>
             <p className="text-sm text-on-surface-variant leading-relaxed max-w-xs">
-              Pusat snack kekinian dengan cita rasa premium. Dipercaya ratusan pelanggan sejak 2026.
+              Pusat snack kekinian dengan cita rasa premium. Dipercaya ratusan pelanggan sejak 2024.
             </p>
           </div>
 
