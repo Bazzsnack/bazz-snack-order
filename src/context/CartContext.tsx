@@ -56,7 +56,7 @@ export const PRODUCTS: Product[] = [
     displayPrice: "Rp 3k",
     description:
       "Rasa teh hijau Jepang otentik yang dibalut balutan kulit manis dan renyah.",
-    image: "/images/risol_matcha.jpeg",
+    image: "/images/risol_matcha.png",
   },
 ];
 
