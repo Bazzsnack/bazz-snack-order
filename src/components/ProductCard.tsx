@@ -14,6 +14,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const quantity = getQuantity(product.id, selectedVariant);
   const isFrozen = selectedVariant === "frozen";
+  const frozenMinQty = product.frozenBundle?.minQty ?? FROZEN_MIN_QTY;
+  const frozenPackPrice = product.frozenBundle?.packPrice ?? (frozenMinQty * product.price);
 
   return (
     <div className="bg-surface-container-low rounded-3xl p-6 pt-0 relative group snack-card-shadow transition-all duration-300 hover:translate-y-[-8px]">
@@ -23,7 +25,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover rounded-2xl shadow-xl transform group-hover:scale-105 transition-transform duration-500"
+          className={`object-cover rounded-2xl shadow-xl transform transition-transform duration-500 ${
+            product.id === "dimsum-keju" ? "scale-[1.3] group-hover:scale-[1.4]" : "group-hover:scale-105"
+          }`}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
         {product.badge && (
@@ -84,7 +88,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 info
               </span>
               <span className="text-[11px] text-secondary font-medium">
-                Min. {FROZEN_MIN_QTY} pcs · Mulai Rp {((FROZEN_MIN_QTY * 3000) / 1000).toFixed(0)}k
+                Min. {frozenMinQty} pcs · Mulai Rp {(frozenPackPrice / 1000).toFixed(0)}k
               </span>
             </div>
           </div>
@@ -101,7 +105,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             >
               <span className="material-symbols-outlined text-sm">
                 {/* Show delete icon when at frozen min qty to hint removal */}
-                {isFrozen && quantity === FROZEN_MIN_QTY ? "delete" : "remove"}
+                {isFrozen && quantity === frozenMinQty ? "delete" : "remove"}
               </span>
             </button>
             <span className="w-8 text-center text-sm font-bold tabular-nums">
