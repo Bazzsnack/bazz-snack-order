@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useCartSidebar } from "@/context/CartSidebarContext";
 
@@ -15,6 +17,7 @@ export default function Navbar() {
   const { totalItems } = useCart();
   const { openSidebar } = useCartSidebar();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav
@@ -23,9 +26,9 @@ export default function Navbar() {
     >
       <div className="flex justify-between items-center h-20 px-6 max-w-7xl mx-auto w-full font-headline tracking-tight relative bg-transparent">
         {/* Logo */}
-        <a
+        <Link
           href="/"
-          className="relative flex items-center w-48 sm:w-64 h-16 origin-left scale-110 sm:scale-125 transition-transform active:scale-95 drop-shadow-[0_0_15px_rgba(255,143,112,0.6)] z-10"
+          className="relative flex items-center shrink-0 w-48 sm:w-64 h-16 origin-left scale-110 sm:scale-125 transition-transform active:scale-95 drop-shadow-[0_0_15px_rgba(255,143,112,0.6)] z-10"
         >
           <Image
             src="/images/logo_bazzsnack.jpeg"
@@ -34,23 +37,26 @@ export default function Navbar() {
             className="object-contain object-left mix-blend-screen"
             priority
           />
-        </a>
+        </Link>
 
         {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center gap-8 z-10">
-          {NAV_LINKS.map((link, idx) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={
-                idx === 0
-                  ? "text-primary font-bold border-b-2 border-primary pb-1 transition-all"
-                  : "text-gray-400 hover:text-white transition-colors"
-              }
-            >
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={
+                  isActive
+                    ? "text-primary font-bold border-b-2 border-primary pb-1 transition-all"
+                    : "text-gray-400 hover:text-white transition-colors"
+                }
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Actions (Cart + Hamburger) */}
@@ -91,16 +97,21 @@ export default function Navbar() {
         }`}
       >
         <div className="flex flex-col px-6 gap-6">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-lg font-bold text-gray-300 hover:text-primary transition-colors border-b border-white/5 pb-2"
-            >
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`text-lg font-bold transition-colors border-b border-white/5 pb-2 ${
+                  isActive ? "text-primary" : "text-gray-300 hover:text-primary"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>

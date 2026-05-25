@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { PRODUCTS } from "@/context/CartContext";
 import ProductCard from "./ProductCard";
 
-export default function ProductSection() {
+export default function ProductSection({ limit }: { limit?: number }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -55,7 +55,7 @@ export default function ProductSection() {
         className="flex lg:grid lg:grid-cols-4 gap-x-8 gap-y-16 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 snap-x snap-mandatory scrollbar-hide pt-10"
         style={{ scrollbarWidth: "none" }}
       >
-        {PRODUCTS.map((product) => (
+        {(limit ? PRODUCTS.slice(0, limit) : PRODUCTS).map((product) => (
           <div
             key={product.id}
             className="min-w-[260px] sm:min-w-[280px] lg:min-w-0 snap-start"
