@@ -20,7 +20,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="bg-surface-container-low rounded-3xl p-6 pt-0 relative group snack-card-shadow transition-all duration-300 hover:translate-y-[-8px]">
       {/* Product Image — overflows top */}
-      <div className="h-40 -mt-10 mb-6 relative z-10">
+      <div className="h-40 -mt-10 mb-6 relative z-10 overflow-hidden rounded-2xl">
         <Image
           src={product.image}
           alt={product.name}
