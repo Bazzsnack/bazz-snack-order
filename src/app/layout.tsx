@@ -20,35 +20,55 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
-  title: "Bazz Snack — Pusat Jajanan Kekinian",
+  title: {
+    default: "Bazz Snack — Risoles, Dimsum & Baso Bakar Kekinian | Pesan Online",
+    template: "%s | Bazz Snack",
+  },
   description:
-    "Pesan risoles kekinian dari Bazz Snack. Tersedia varian Coklat Lumer, Mayo, Mentai, dan Matcha. Rasakan cita rasa premium yang bikin nagih!",
+    "Pesan jajanan kekinian dari Bazz Snack Mojokerto! Risoles Coklat, Mayo, Mentai, Matcha, Dimsum Keju, Dimsum Mentai, hingga Baso Bakar. Tersedia Original & Frozen. Order mudah via WhatsApp!",
   keywords: [
     "bazz snack",
-    "risoles",
+    "bazz snack mojokerto",
+    "risoles kekinian",
     "risoles coklat",
     "risoles mayo",
     "risoles mentai",
     "risoles matcha",
+    "dimsum keju",
+    "dimsum mentai",
+    "dimsum box",
+    "baso bakar",
     "snack kekinian",
-    "order online",
+    "jajanan kekinian",
+    "order snack online",
+    "frozen snack mojokerto",
     "jajanan mojokerto",
   ],
   openGraph: {
-    title: "Bazz Snack — Pusat Jajanan Kekinian",
+    title: "Bazz Snack — Risoles, Dimsum & Baso Bakar Kekinian",
     description:
-      "Nikmati berbagai varian risoles premium dari Bazz Snack. Langsung siap antar!",
+      "Jajanan premium kekinian dari Bazz Snack. Risoles, Dimsum, Baso Bakar — tersedia Original & Frozen. Langsung siap antar!",
     type: "website",
     locale: "id_ID",
+    siteName: "Bazz Snack",
     url: "https://bazz-snack.vercel.app",
     images: [
       {
         url: "https://bazz-snack.vercel.app/images/og_preview.png",
         width: 1200,
         height: 630,
-        alt: "Preview Bazz Snack",
+        alt: "Preview Menu Bazz Snack — Risoles, Dimsum, Baso Bakar",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bazz Snack — Risoles, Dimsum & Baso Bakar Kekinian",
+    description:
+      "Jajanan premium kekinian dari Bazz Snack Mojokerto. Pesan langsung via WhatsApp!",
+  },
+  alternates: {
+    canonical: "https://bazz-snack.vercel.app",
   },
 };
 
