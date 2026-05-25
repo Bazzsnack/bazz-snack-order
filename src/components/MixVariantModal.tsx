@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { PRODUCTS } from "@/context/CartContext";
 
@@ -16,8 +17,13 @@ export default function MixVariantModal({ isOpen, onClose, onConfirm }: MixVaria
 
   // State untuk melacak jumlah tiap varian
   const [selections, setSelections] = useState<Record<string, number>>({});
+  const [mounted, setMounted] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
 
   const totalSelected = Object.values(selections).reduce((a, b) => a + b, 0);
   const remaining = 5 - totalSelected;
@@ -34,7 +40,7 @@ export default function MixVariantModal({ isOpen, onClose, onConfirm }: MixVaria
     }
   };
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
       <div className="bg-surface-container-low border border-outline-variant/15 w-full max-w-md rounded-[2rem] shadow-2xl relative animate-slide-up flex flex-col max-h-[90vh]">
         {/* Header */}
@@ -114,6 +120,7 @@ export default function MixVariantModal({ isOpen, onClose, onConfirm }: MixVaria
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

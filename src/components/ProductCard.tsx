@@ -114,10 +114,10 @@ export default function ProductCard({ product }: ProductCardProps) {
               </div>
             )}
 
-            {/* Frozen info badge — only shows when Frozen is selected */}
+            {/* Frozen info badge — only shows when Frozen is selected (except for Mix Package) */}
             <div
               className={`overflow-hidden transition-all duration-300 ease-out ${
-                isFrozen ? "max-h-12 opacity-100" : "max-h-0 opacity-0"
+                isFrozen && product.id !== "risol-mix" ? "max-h-12 opacity-100" : "max-h-0 opacity-0"
               }`}
             >
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/10 border border-secondary/20">
