@@ -1,0 +1,6 @@
+# Bazz Snack — robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://bazz-snack.vercel.app/sitemap.xml
