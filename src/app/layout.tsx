@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Manrope } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import { CartSidebarProvider } from "@/context/CartSidebarContext";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import StickyCheckoutBar from "@/components/StickyCheckoutBar";
+import CartSidebarWrapper from "@/components/CartSidebarWrapper";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -220,7 +224,13 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
         <CartProvider>
-          <CartSidebarProvider>{children}</CartSidebarProvider>
+          <CartSidebarProvider>
+            <Navbar />
+            {children}
+            <Footer />
+            <StickyCheckoutBar />
+            <CartSidebarWrapper />
+          </CartSidebarProvider>
         </CartProvider>
       </body>
     </html>

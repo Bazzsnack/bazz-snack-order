@@ -37,13 +37,13 @@ export default function HeroSection() {
           {/* CTAs */}
           <div className="flex flex-wrap gap-4">
             <a
-              href="#menu"
+              href="/menu"
               className="liquid-fire text-on-primary-fixed font-bold px-8 py-4 rounded-xl ambient-shadow hover:scale-105 active:scale-95 transition-transform"
             >
               Order Sekarang
             </a>
             <a
-              href="#menu"
+              href="/menu"
               className="px-8 py-4 rounded-xl border border-outline-variant/30 text-primary font-bold hover:bg-surface-container-low transition-all"
             >
               Lihat Menu
