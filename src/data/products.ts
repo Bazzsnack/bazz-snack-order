@@ -77,4 +77,15 @@ export const products: Product[] = [
       packPrice: 15000,
     },
   },
+  {
+    id: "dimsum-mentai",
+    name: "Dimsum Mentai",
+    price: 23000,
+    displayPrice: "Rp 23k",
+    description:
+      "Dimsum ayam kukus premium yang diselimuti saus mentai racikan rahasia, dibakar (di-torch) hingga menghasilkan aroma smokey yang wangi dan lumer di mulut.",
+    image: "/gambar_produk/dimsum-mentai.png",
+    badge: "Populer",
+    badgeColor: "bg-secondary",
+  },
 ];
