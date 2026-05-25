@@ -18,7 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const frozenPackPrice = product.frozenBundle?.packPrice ?? (frozenMinQty * product.price);
 
   return (
-    <div className="bg-surface-container-low rounded-3xl p-6 pt-0 relative group snack-card-shadow transition-all duration-300 hover:translate-y-[-8px]">
+    <div className="flex flex-col h-full bg-surface-container-low rounded-3xl p-6 pt-0 relative group snack-card-shadow transition-all duration-300 hover:translate-y-[-8px]">
       {/* Product Image — overflows top */}
       <div className="h-40 -mt-10 mb-6 relative z-10 overflow-hidden rounded-2xl">
         <Image
@@ -40,7 +40,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Product Details */}
-      <div className="space-y-4">
+      <div className="flex flex-col flex-1 space-y-4">
         <div className="flex justify-between items-start">
           <h3 className="font-headline font-bold text-xl">{product.name}</h3>
           <span className="text-primary font-black text-lg shrink-0 ml-2">
@@ -51,6 +51,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p className="text-on-surface-variant text-sm line-clamp-2">
           {product.description}
         </p>
+
+        <div className="flex-1"></div>
 
         {/* Variant Selector */}
         {product.hasFrozen && (
