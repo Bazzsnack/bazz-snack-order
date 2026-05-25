@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden px-6 max-w-7xl mx-auto pt-20"
+      className="relative min-h-[85vh] lg:min-h-screen flex items-center overflow-hidden px-6 max-w-7xl mx-auto pt-32 pb-20 lg:pt-20"
     >
       <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
         {/* Left Content */}
@@ -35,19 +36,19 @@ export default function HeroSection() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-4">
-            <a
+          <div className="flex flex-col sm:flex-row gap-4 w-full">
+            <Link
               href="/menu"
-              className="liquid-fire text-on-primary-fixed font-bold px-8 py-4 rounded-xl ambient-shadow hover:scale-105 active:scale-95 transition-transform"
+              className="liquid-fire w-full sm:w-auto text-center text-on-primary-fixed font-bold px-8 py-4 rounded-xl ambient-shadow hover:scale-105 active:scale-95 transition-transform"
             >
               Order Sekarang
-            </a>
-            <a
+            </Link>
+            <Link
               href="/menu"
-              className="px-8 py-4 rounded-xl border border-outline-variant/30 text-primary font-bold hover:bg-surface-container-low transition-all"
+              className="w-full sm:w-auto text-center px-8 py-4 rounded-xl border border-outline-variant/30 text-primary font-bold hover:bg-surface-container-low transition-all"
             >
               Lihat Menu
-            </a>
+            </Link>
           </div>
         </div>
 
