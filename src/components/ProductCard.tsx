@@ -18,9 +18,9 @@ export default function ProductCard({ product }: ProductCardProps) {
   const frozenPackPrice = product.frozenBundle?.packPrice ?? (frozenMinQty * product.price);
 
   return (
-    <div className="flex flex-col h-full bg-surface-container-low rounded-3xl p-6 pt-0 relative group snack-card-shadow transition-all duration-300 hover:translate-y-[-8px]">
-      {/* Product Image — overflows top */}
-      <div className="h-40 -mt-10 mb-6 relative z-10 overflow-hidden rounded-2xl">
+    <div className="flex flex-col h-full bg-surface-container-low rounded-3xl p-4 sm:p-6 relative group snack-card-shadow transition-all duration-300 hover:translate-y-[-8px]">
+      {/* Product Image */}
+      <div className="h-40 sm:h-48 mb-6 relative z-10 overflow-hidden rounded-2xl">
         <Image
           src={product.image}
           alt={product.name}
