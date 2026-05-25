@@ -7,6 +7,10 @@ export interface Product {
   image: string;
   badge?: string;
   badgeColor?: string;
+  frozenBundle?: {
+    minQty: number;
+    packPrice: number;
+  };
 }
 
 export const products: Product[] = [
@@ -57,5 +61,20 @@ export const products: Product[] = [
     description:
       "Paket praktis Dimsum Box isi 10 pcs, include dengan 2 saus lezat dan sumpit, siap disajikan dan dinikmati.",
     image: "/gambar_produk/dimsum-box.jpg",
+  },
+  {
+    id: "dimsum-keju",
+    name: "Dimsum Keju",
+    price: 2000,
+    displayPrice: "Rp 2k",
+    description:
+      "Dimsum ayam gurih dengan topping keju leleh yang lumer di mulut. Sensasi creamy dan gurih dalam satu gigitan!",
+    image: "/gambar_produk/dimsum-keju.png",
+    badge: "Populer",
+    badgeColor: "bg-primary",
+    frozenBundle: {
+      minQty: 7,
+      packPrice: 15000,
+    },
   },
 ];

@@ -46,8 +46,10 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           ),
         };
       }
+      const product = PRODUCTS.find((p) => p.id === action.productId);
+      const minQty = product?.frozenBundle?.minQty ?? FROZEN_MIN_QTY;
       // First add — frozen starts at FROZEN_MIN_QTY, ori starts at 1
-      const startQty = action.variant === "frozen" ? FROZEN_MIN_QTY : 1;
+      const startQty = action.variant === "frozen" ? minQty : 1;
       return {
         items: [
           ...state.items,
@@ -65,7 +67,11 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           )
           // Frozen items get removed if they drop below min qty; ori removed at 0
           .filter((i) => {
-            if (i.variant === "frozen") return i.quantity >= FROZEN_MIN_QTY;
+            if (i.variant === "frozen") {
+              const product = PRODUCTS.find((p) => p.id === i.productId);
+              const minQty = product?.frozenBundle?.minQty ?? FROZEN_MIN_QTY;
+              return i.quantity >= minQty;
+            }
             return i.quantity > 0;
           }),
       };
@@ -84,8 +90,10 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           ),
         };
       }
+      const product = PRODUCTS.find((p) => p.id === action.productId);
+      const minQty = product?.frozenBundle?.minQty ?? FROZEN_MIN_QTY;
       // First add — frozen starts at FROZEN_MIN_QTY
-      const startQty = action.variant === "frozen" ? FROZEN_MIN_QTY : 1;
+      const startQty = action.variant === "frozen" ? minQty : 1;
       return {
         items: [
           ...state.items,
@@ -121,7 +129,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const totalItems = state.items.reduce((sum, i) => sum + i.quantity, 0);
     const totalPrice = state.items.reduce((sum, i) => {
       const product = PRODUCTS.find((p) => p.id === i.productId);
-      return sum + (product ? product.price * i.quantity : 0);
+      if (!product) return sum;
+
+      if (i.variant === "frozen" && product.frozenBundle) {
+        const minQty = product.frozenBundle.minQty;
+        const packs = Math.floor(i.quantity / minQty);
+        const remainder = i.quantity % minQty;
+        return sum + packs * product.frozenBundle.packPrice + remainder * product.price;
+      }
+      return sum + product.price * i.quantity;
     }, 0);
 
     return {
