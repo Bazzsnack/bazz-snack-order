@@ -23,7 +23,7 @@ export default function ProductSection() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <h2 className="font-headline font-extrabold text-4xl md:text-5xl tracking-tight mb-4 text-white">
-            Menu Andalan <span className="text-primary italic">Risoles</span> Kami
+            Menu <span className="text-primary italic">Andalan</span> Kami
           </h2>
           <p className="text-on-surface-variant max-w-lg">
             Dibuat langsung dengan bahan-bahan pilihan dan resep rahasia Bazz Snack yang bikin nagih.
