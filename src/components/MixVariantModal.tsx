@@ -56,7 +56,7 @@ export default function MixVariantModal({ isOpen, onClose, onConfirm }: MixVaria
           {risoles.map((risol) => (
             <div key={risol.id} className="flex items-center gap-4 bg-surface-container-highest p-3 rounded-xl">
               <div className="relative w-14 h-14 rounded-lg overflow-hidden shrink-0">
-                <Image src={risol.image} alt={risol.name} fill className="object-cover" />
+                <Image src={Array.isArray(risol.image) ? risol.image[0] : risol.image} alt={risol.name} fill className="object-cover" />
               </div>
               <div className="flex-1">
                 <h4 className="font-headline font-bold text-sm">{risol.name}</h4>

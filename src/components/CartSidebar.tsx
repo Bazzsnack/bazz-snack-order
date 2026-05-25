@@ -126,7 +126,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   {/* Product Image */}
                   <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
                     <Image
-                      src={product.image}
+                      src={Array.isArray(product.image) ? product.image[0] : product.image}
                       alt={product.name}
                       fill
                       className="object-cover"

@@ -4,7 +4,7 @@ export interface Product {
   price: number;
   displayPrice: string;
   description: string;
-  image: string;
+  image: string | string[];
   badge?: string;
   badgeColor?: string;
   hasFrozen?: boolean;
@@ -68,8 +68,12 @@ export const products: Product[] = [
     name: "Paket Mix Risoles (Isi 5)",
     price: 15000,
     displayPrice: "Rp 15k / Box",
-    description: "Pilih sendiri 5 varian risoles favoritmu dalam satu box frozen.",
-    image: "/gambar_produk/risol_coklat.jpeg", // using generic image
+    description: "Pilih sendiri 5 varian risoles favoritmu dalam satu box.",
+    image: [
+      "/gambar_produk/risol_mentai.jpeg",
+      "/gambar_produk/risol_coklat.jpeg",
+      "/gambar_produk/risol_mayo.jpeg",
+    ],
     badge: "Spesial",
     badgeColor: "bg-tertiary",
     hasFrozen: true,

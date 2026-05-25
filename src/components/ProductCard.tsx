@@ -26,16 +26,42 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="flex flex-col h-full bg-surface-container-low rounded-3xl p-4 sm:p-6 relative group snack-card-shadow transition-all duration-300 hover:translate-y-[-8px]">
       {/* Product Image */}
-      <div className="h-40 sm:h-48 mb-6 relative z-10 overflow-hidden rounded-2xl">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className={`object-cover rounded-2xl shadow-xl transform transition-transform duration-500 ${
-            product.id === "dimsum-keju" ? "scale-[1.3] group-hover:scale-[1.4]" : "group-hover:scale-105"
-          }`}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        />
+      <div className="h-40 sm:h-48 mb-6 relative z-10 overflow-hidden rounded-2xl flex items-center justify-center">
+        {Array.isArray(product.image) ? (
+          <div className="relative w-full h-full flex items-center justify-center">
+            {product.image.map((img, i) => {
+              const rotations = [
+                "-rotate-12 -translate-x-6 z-0 group-hover:-rotate-[15deg] group-hover:-translate-x-8",
+                "rotate-0 z-10 group-hover:-translate-y-2",
+                "rotate-12 translate-x-6 z-20 group-hover:rotate-[15deg] group-hover:translate-x-8"
+              ];
+              return (
+                <div
+                  key={i}
+                  className={`absolute inset-0 transition-all duration-500 origin-bottom ${rotations[i]}`}
+                >
+                  <Image
+                    src={img}
+                    alt={`${product.name} ${i + 1}`}
+                    fill
+                    className="object-cover rounded-xl shadow-2xl border-[3px] border-surface-container-low"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className={`object-cover rounded-2xl shadow-xl transform transition-transform duration-500 ${
+              product.id === "dimsum-keju" ? "scale-[1.3] group-hover:scale-[1.4]" : "group-hover:scale-105"
+            }`}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+        )}
         {product.badge && (
           <div
             className={`absolute top-2 right-2 ${product.badgeColor ?? "bg-primary"} px-3 py-1 rounded-full text-on-primary font-bold text-xs uppercase tracking-tighter`}
