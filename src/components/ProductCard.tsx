@@ -31,14 +31,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="relative w-full h-full flex items-center justify-center">
             {product.image.map((img, i) => {
               const rotations = [
-                "-rotate-12 -translate-x-6 z-0 group-hover:-rotate-[15deg] group-hover:-translate-x-8",
-                "rotate-0 z-10 group-hover:-translate-y-2",
-                "rotate-12 translate-x-6 z-20 group-hover:rotate-[15deg] group-hover:translate-x-8"
+                "-rotate-[15deg] -translate-x-6 translate-y-2 z-0 group-hover:-rotate-[25deg] group-hover:-translate-x-10",
+                "rotate-0 z-10 group-hover:-translate-y-4 shadow-xl",
+                "rotate-[15deg] translate-x-6 translate-y-2 z-20 group-hover:rotate-[25deg] group-hover:translate-x-10"
               ];
               return (
                 <div
                   key={i}
-                  className={`absolute inset-0 transition-all duration-500 origin-bottom ${rotations[i]}`}
+                  className={`absolute w-[55%] h-[85%] sm:w-[50%] sm:h-[90%] transition-all duration-500 origin-bottom ${rotations[i]}`}
                 >
                   <Image
                     src={img}
