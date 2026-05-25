@@ -7,58 +7,9 @@ export const FROZEN_MIN_QTY = 5;
 export const FROZEN_PRICE = 3000; // same per-piece price, but min 5 = 15k
 
 // ─── Product Data ────────────────────────────────────────────────────────────
-export type Product = {
-  id: string;
-  name: string;
-  price: number;
-  displayPrice: string;
-  description: string;
-  image: string;
-  badge?: string;
-  badgeColor?: string;
-};
-
-export const PRODUCTS: Product[] = [
-  {
-    id: "risoles-coklat",
-    name: "Risoles Coklat",
-    price: 3000,
-    displayPrice: "Rp 3k",
-    description: "Lumeran coklat premium dalam balutan kulit krispi yang gurih.",
-    image: "/images/risol_coklat.jpeg",
-    badge: "Baru",
-    badgeColor: "bg-primary",
-  },
-  {
-    id: "risoles-mayo",
-    name: "Risoles Mayo",
-    price: 3000,
-    displayPrice: "Rp 3k",
-    description:
-      "Perpaduan creamy mayonnaise, smoked beef, dan telur berkualitas pilihan.",
-    image: "/images/risol_mayo.jpeg",
-    badge: "Terlaris",
-    badgeColor: "bg-secondary",
-  },
-  {
-    id: "risoles-mentai",
-    name: "Risoles Mentai",
-    price: 3000,
-    displayPrice: "Rp 3k",
-    description:
-      "Dilumuri saus mentai spesial yang di-torch sempurna untuk rasa smokey unik.",
-    image: "/images/risol_mentai.jpeg",
-  },
-  {
-    id: "risoles-matcha",
-    name: "Risoles Matcha",
-    price: 3000,
-    displayPrice: "Rp 3k",
-    description:
-      "Rasa teh hijau Jepang otentik yang dibalut balutan kulit manis dan renyah.",
-    image: "/images/risol_matcha.png",
-  },
-];
+import { Product as ExtProduct, products as importedProducts } from "@/data/products";
+export type Product = ExtProduct;
+export const PRODUCTS = importedProducts;
 
 // ─── Cart State Type ─────────────────────────────────────────────────────────
 export type VariantType = "ori" | "frozen";
