@@ -5,8 +5,8 @@ export interface Product {
   displayPrice: string;
   description: string;
   image: string;
-  badge?: string;
   badgeColor?: string;
+  hasFrozen?: boolean;
   frozenBundle?: {
     minQty: number;
     packPrice: number;
@@ -23,6 +23,7 @@ export const products: Product[] = [
     image: "/gambar_produk/risol_coklat.jpeg",
     badge: "Baru",
     badgeColor: "bg-primary",
+    hasFrozen: true,
   },
   {
     id: "risol-mayo",
@@ -34,6 +35,7 @@ export const products: Product[] = [
     image: "/gambar_produk/risol_mayo.jpeg",
     badge: "Terlaris",
     badgeColor: "bg-secondary",
+    hasFrozen: true,
   },
   {
     id: "risol-mentai",
@@ -43,6 +45,7 @@ export const products: Product[] = [
     description:
       "Dilumuri saus mentai spesial yang di-torch sempurna untuk rasa smokey unik.",
     image: "/gambar_produk/risol_mentai.jpeg",
+    hasFrozen: true,
   },
   {
     id: "risol-matcha",
@@ -52,6 +55,7 @@ export const products: Product[] = [
     description:
       "Rasa teh hijau Jepang otentik yang dibalut balutan kulit manis dan renyah.",
     image: "/gambar_produk/risol_matcha.png",
+    hasFrozen: true,
   },
   {
     id: "dimsum-box",
@@ -61,6 +65,11 @@ export const products: Product[] = [
     description:
       "Paket praktis Dimsum Box isi 10 pcs, include dengan 2 saus lezat dan sumpit, siap disajikan dan dinikmati.",
     image: "/gambar_produk/dimsum-box.jpg",
+    hasFrozen: true,
+    frozenBundle: {
+      minQty: 1,
+      packPrice: 10000,
+    },
   },
   {
     id: "dimsum-keju",
@@ -72,6 +81,7 @@ export const products: Product[] = [
     image: "/gambar_produk/dimsum-keju.png",
     badge: "Populer",
     badgeColor: "bg-primary",
+    hasFrozen: true,
     frozenBundle: {
       minQty: 7,
       packPrice: 15000,

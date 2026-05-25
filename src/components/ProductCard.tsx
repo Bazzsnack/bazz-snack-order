@@ -53,46 +53,48 @@ export default function ProductCard({ product }: ProductCardProps) {
         </p>
 
         {/* Variant Selector */}
-        <div className="space-y-2 pt-2">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setSelectedVariant("ori")}
-              className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
-                selectedVariant === "ori"
-                  ? "bg-primary text-on-primary border-primary"
-                  : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
-              }`}
-            >
-              Original
-            </button>
-            <button
-              onClick={() => setSelectedVariant("frozen")}
-              className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
-                selectedVariant === "frozen"
-                  ? "bg-secondary text-secondary-container border-secondary"
-                  : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
-              }`}
-            >
-              ❄️ Frozen
-            </button>
-          </div>
+        {product.hasFrozen && (
+          <div className="space-y-2 pt-2">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setSelectedVariant("ori")}
+                className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
+                  selectedVariant === "ori"
+                    ? "bg-primary text-on-primary border-primary"
+                    : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
+                }`}
+              >
+                Original
+              </button>
+              <button
+                onClick={() => setSelectedVariant("frozen")}
+                className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
+                  selectedVariant === "frozen"
+                    ? "bg-secondary text-secondary-container border-secondary"
+                    : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
+                }`}
+              >
+                ❄️ Frozen
+              </button>
+            </div>
 
-          {/* Frozen info badge — only shows when Frozen is selected */}
-          <div
-            className={`overflow-hidden transition-all duration-300 ease-out ${
-              isFrozen ? "max-h-12 opacity-100" : "max-h-0 opacity-0"
-            }`}
-          >
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/10 border border-secondary/20">
-              <span className="material-symbols-outlined text-secondary text-sm">
-                info
-              </span>
-              <span className="text-[11px] text-secondary font-medium">
-                Min. {frozenMinQty} pcs · Mulai Rp {(frozenPackPrice / 1000).toFixed(0)}k
-              </span>
+            {/* Frozen info badge — only shows when Frozen is selected */}
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-out ${
+                isFrozen ? "max-h-12 opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/10 border border-secondary/20">
+                <span className="material-symbols-outlined text-secondary text-sm">
+                  info
+                </span>
+                <span className="text-[11px] text-secondary font-medium">
+                  Min. {frozenMinQty} pcs · Mulai Rp {(frozenPackPrice / 1000).toFixed(0)}k
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Quantity Controls + Add to Cart */}
         <div className="flex items-center justify-between pt-1">
