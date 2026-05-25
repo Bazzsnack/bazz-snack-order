@@ -88,4 +88,13 @@ export const products: Product[] = [
     badge: "Populer",
     badgeColor: "bg-secondary",
   },
+  {
+    id: "baso-bakar",
+    name: "Baso Bakar",
+    price: 3000,
+    displayPrice: "Rp 3k",
+    description:
+      "Satu tusuk berisi 4 baso kenyal yang dibakar di atas arang hingga gosong sempurna, dilumuri bumbu kacang dan kecap manis yang bikin nagih.",
+    image: "/gambar_produk/baso-bakar.png",
+  },
 ];
