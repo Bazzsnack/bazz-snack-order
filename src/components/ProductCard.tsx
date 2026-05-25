@@ -64,7 +64,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
         {product.badge && (
           <div
-            className={`absolute top-2 right-2 ${product.badgeColor ?? "bg-primary"} px-3 py-1 rounded-full text-on-primary font-bold text-xs uppercase tracking-tighter`}
+            className={`absolute z-50 top-2 right-2 ${product.badgeColor ?? "bg-primary"} px-3 py-1 rounded-full text-on-primary font-bold text-xs uppercase tracking-tighter`}
           >
             {product.badge}
           </div>
