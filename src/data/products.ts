@@ -5,6 +5,7 @@ export interface Product {
   displayPrice: string;
   description: string;
   image: string;
+  badge?: string;
   badgeColor?: string;
   hasFrozen?: boolean;
   frozenBundle?: {
