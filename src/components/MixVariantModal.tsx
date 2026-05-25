@@ -47,7 +47,7 @@ export default function MixVariantModal({ isOpen, onClose, onConfirm }: MixVaria
           </button>
           <h2 className="font-headline text-xl font-bold mb-1">Isi Paket Mix</h2>
           <p className="text-sm text-on-surface-variant">
-            Pilih 5 buah risoles untuk paket frozen ini. (Sisa: <span className="font-bold text-primary">{remaining}</span>)
+            Pilih 5 buah risoles untuk paket ini. (Sisa: <span className="font-bold text-primary">{remaining}</span>)
           </p>
         </div>
 

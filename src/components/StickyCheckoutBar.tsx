@@ -102,21 +102,22 @@ export default function StickyCheckoutBar() {
       .map((item) => {
         const product = PRODUCTS.find((p) => p.id === item.productId);
         
-        if (item.variant === "frozen") {
-          let mixText = "";
-          if (item.mixSelections) {
-            const mixDetails = item.mixSelections
-              .split(",")
-              .map(mix => {
-                const [id, qty] = mix.split(":");
-                const mixProduct = PRODUCTS.find((p) => p.id === id);
-                return `${qty}x ${mixProduct?.name.replace("Risoles ", "") || id}`;
-              })
-              .join(", ");
-            mixText = ` [Isi: ${mixDetails}]`;
-          }
-          
-          return `- ${item.quantity} Box ${product?.name ?? item.productId} (Frozen)${mixText}`;
+        let mixText = "";
+        if (item.mixSelections) {
+          const mixDetails = item.mixSelections
+            .split(",")
+            .map(mix => {
+              const [id, qty] = mix.split(":");
+              const mixProduct = PRODUCTS.find((p) => p.id === id);
+              return `${qty}x ${mixProduct?.name.replace("Risoles ", "") || id}`;
+            })
+            .join(", ");
+          mixText = ` [Isi: ${mixDetails}]`;
+        }
+        
+        if (item.variant === "frozen" || product?.id === "risol-mix") {
+          const variantLabel = item.variant === "ori" ? "Original" : "Frozen";
+          return `- ${item.quantity} Box ${product?.name ?? item.productId} (${variantLabel})${mixText}`;
         }
         
         const variantLabel = item.variant === "ori" ? "Original" : "Frozen";

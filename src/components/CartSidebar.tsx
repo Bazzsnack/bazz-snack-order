@@ -148,7 +148,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         >
                           {getVariantLabel(item.variant)}
                         </span>
-                        {item.variant === "frozen" && (
+                        { (item.variant === "frozen" || product.id === "risol-mix") && (
                           <span className="text-[9px] bg-secondary/15 text-secondary px-1.5 py-0.5 rounded font-medium">
                             Isi {product.frozenBundle?.minQty ?? FROZEN_MIN_QTY}
                           </span>
@@ -180,12 +180,12 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                           className="w-7 h-7 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
                           aria-label={`Kurangi ${product.name}`}
                         >
-                          <span className="material-symbols-outlined text-sm" title={item.variant === "frozen" && item.quantity === 1 ? "Hapus dari keranjang" : "Kurangi"}>
-                            {item.variant === "frozen" && item.quantity === 1 ? "delete" : "remove"}
+                          <span className="material-symbols-outlined text-sm" title={(item.variant === "frozen" || product.id === "risol-mix") && item.quantity === 1 ? "Hapus dari keranjang" : "Kurangi"}>
+                            {(item.variant === "frozen" || product.id === "risol-mix") && item.quantity === 1 ? "delete" : "remove"}
                           </span>
                         </button>
                         <span className="w-8 text-center text-xs font-bold tabular-nums">
-                          {item.variant === "frozen" ? `${item.quantity} Box` : item.quantity}
+                          {(item.variant === "frozen" || product.id === "risol-mix") ? `${item.quantity} Box` : item.quantity}
                         </span>
                         <button
                           onClick={() =>
@@ -202,7 +202,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
                       {/* Price */}
                       <span className="font-headline font-extrabold text-sm text-primary">
-                        Rp {formatRupiah((item.variant === "frozen" && product.frozenBundle ? product.frozenBundle.packPrice : product.price) * item.quantity)}
+                        Rp {formatRupiah(((item.variant === "frozen" || product.id === "risol-mix") && product.frozenBundle ? product.frozenBundle.packPrice : product.price) * item.quantity)}
                       </span>
                     </div>
                   </div>

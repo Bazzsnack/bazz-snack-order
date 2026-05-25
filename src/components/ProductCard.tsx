@@ -113,7 +113,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               onClick={() => setIsMixModalOpen(true)}
               className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-on-primary py-2.5 rounded-xl font-bold transition-all cursor-pointer"
             >
-              Pesan Mix Frozen
+              Pesan Mix {selectedVariant === "frozen" ? "Frozen" : "Original"}
             </button>
           ) : (
             <>

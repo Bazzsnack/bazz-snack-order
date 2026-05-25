@@ -73,7 +73,6 @@ export const products: Product[] = [
     badge: "Spesial",
     badgeColor: "bg-tertiary",
     hasFrozen: true,
-    onlyFrozen: true,
     frozenBundle: { minQty: 5, packPrice: 15000 },
   },
   {
