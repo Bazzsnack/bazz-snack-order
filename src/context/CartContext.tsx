@@ -18,6 +18,7 @@ export type CartItem = {
   productId: string;
   variant: VariantType;
   quantity: number;
+  mixSelections?: string;
 };
 
 type CartState = {
@@ -26,9 +27,9 @@ type CartState = {
 
 // ─── Actions ─────────────────────────────────────────────────────────────────
 type CartAction =
-  | { type: "INCREMENT"; productId: string; variant: VariantType }
-  | { type: "DECREMENT"; productId: string; variant: VariantType }
-  | { type: "ADD_TO_CART"; productId: string; variant: VariantType }
+  | { type: "INCREMENT"; productId: string; variant: VariantType; mixSelections?: string }
+  | { type: "DECREMENT"; productId: string; variant: VariantType; mixSelections?: string }
+  | { type: "ADD_TO_CART"; productId: string; variant: VariantType; mixSelections?: string }
   | { type: "RESET" };
 
 function cartReducer(state: CartState, action: CartAction): CartState {
@@ -46,14 +47,11 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           ),
         };
       }
-      const product = PRODUCTS.find((p) => p.id === action.productId);
-      const minQty = product?.frozenBundle?.minQty ?? FROZEN_MIN_QTY;
-      // First add — frozen starts at FROZEN_MIN_QTY, ori starts at 1
-      const startQty = action.variant === "frozen" ? minQty : 1;
+      const startQty = 1; // 1 piece for ori, 1 box for frozen
       return {
         items: [
           ...state.items,
-          { productId: action.productId, variant: action.variant, quantity: startQty },
+          { productId: action.productId, variant: action.variant, quantity: startQty, mixSelections: action.mixSelections },
         ],
       };
     }
@@ -61,43 +59,30 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return {
         items: state.items
           .map((i) =>
-            i.productId === action.productId && i.variant === action.variant
+            i.productId === action.productId && i.variant === action.variant && i.mixSelections === action.mixSelections
               ? { ...i, quantity: i.quantity - 1 }
               : i
           )
-          // Frozen items get removed if they drop below min qty; ori removed at 0
-          .filter((i) => {
-            if (i.variant === "frozen") {
-              const product = PRODUCTS.find((p) => p.id === i.productId);
-              const minQty = product?.frozenBundle?.minQty ?? FROZEN_MIN_QTY;
-              return i.quantity >= minQty;
-            }
-            return i.quantity > 0;
-          }),
+          .filter((i) => i.quantity > 0),
       };
     }
     case "ADD_TO_CART": {
       const exists = state.items.find(
-        (i) => i.productId === action.productId && i.variant === action.variant
+        (i) => i.productId === action.productId && i.variant === action.variant && i.mixSelections === action.mixSelections
       );
       if (exists) {
-        // For frozen, increment by 1 if already at/above min
         return {
           items: state.items.map((i) =>
-            i.productId === action.productId && i.variant === action.variant
+            i.productId === action.productId && i.variant === action.variant && i.mixSelections === action.mixSelections
               ? { ...i, quantity: i.quantity + 1 }
               : i
           ),
         };
       }
-      const product = PRODUCTS.find((p) => p.id === action.productId);
-      const minQty = product?.frozenBundle?.minQty ?? FROZEN_MIN_QTY;
-      // First add — frozen starts at FROZEN_MIN_QTY
-      const startQty = action.variant === "frozen" ? minQty : 1;
       return {
         items: [
           ...state.items,
-          { productId: action.productId, variant: action.variant, quantity: startQty },
+          { productId: action.productId, variant: action.variant, quantity: 1, mixSelections: action.mixSelections },
         ],
       };
     }
@@ -113,10 +98,10 @@ type CartContextType = {
   items: CartItem[];
   totalItems: number;
   totalPrice: number;
-  getQuantity: (productId: string, variant: VariantType) => number;
-  increment: (productId: string, variant: VariantType) => void;
-  decrement: (productId: string, variant: VariantType) => void;
-  addToCart: (productId: string, variant: VariantType) => void;
+  getQuantity: (productId: string, variant: VariantType, mixSelections?: string) => number;
+  increment: (productId: string, variant: VariantType, mixSelections?: string) => void;
+  decrement: (productId: string, variant: VariantType, mixSelections?: string) => void;
+  addToCart: (productId: string, variant: VariantType, mixSelections?: string) => void;
   reset: () => void;
 };
 
@@ -132,10 +117,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (!product) return sum;
 
       if (i.variant === "frozen" && product.frozenBundle) {
-        const minQty = product.frozenBundle.minQty;
-        const packs = Math.floor(i.quantity / minQty);
-        const remainder = i.quantity % minQty;
-        return sum + packs * product.frozenBundle.packPrice + remainder * product.price;
+        return sum + i.quantity * product.frozenBundle.packPrice;
       }
       return sum + product.price * i.quantity;
     }, 0);
@@ -144,14 +126,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       items: state.items,
       totalItems,
       totalPrice,
-      getQuantity: (productId: string, variant: VariantType) =>
-        state.items.find((i) => i.productId === productId && i.variant === variant)?.quantity ?? 0,
-      increment: (productId: string, variant: VariantType) =>
-        dispatch({ type: "INCREMENT", productId, variant }),
-      decrement: (productId: string, variant: VariantType) =>
-        dispatch({ type: "DECREMENT", productId, variant }),
-      addToCart: (productId: string, variant: VariantType) =>
-        dispatch({ type: "ADD_TO_CART", productId, variant }),
+      getQuantity: (productId: string, variant: VariantType, mixSelections?: string) =>
+        state.items.find((i) => i.productId === productId && i.variant === variant && i.mixSelections === mixSelections)?.quantity ?? 0,
+      increment: (productId: string, variant: VariantType, mixSelections?: string) =>
+        dispatch({ type: "INCREMENT", productId, variant, mixSelections }),
+      decrement: (productId: string, variant: VariantType, mixSelections?: string) =>
+        dispatch({ type: "DECREMENT", productId, variant, mixSelections }),
+      addToCart: (productId: string, variant: VariantType, mixSelections?: string) =>
+        dispatch({ type: "ADD_TO_CART", productId, variant, mixSelections }),
       reset: () => dispatch({ type: "RESET" }),
     };
   }, [state.items]);

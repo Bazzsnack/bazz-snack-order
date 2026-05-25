@@ -101,22 +101,22 @@ export default function StickyCheckoutBar() {
       .filter((item) => item.quantity > 0)
       .map((item) => {
         const product = PRODUCTS.find((p) => p.id === item.productId);
-        const minQty = product?.frozenBundle?.minQty ?? 5; // FROZEN_MIN_QTY
         
         if (item.variant === "frozen") {
-          const packageCount = Math.floor(item.quantity / minQty);
-          const remainder = item.quantity % minQty;
-          
-          let mixHint = "";
-          if (product?.id.startsWith("risol")) {
-            mixHint = " *Bisa Mix Varian (Tulis di Catatan)*";
+          let mixText = "";
+          if (item.mixSelections) {
+            const mixDetails = item.mixSelections
+              .split(",")
+              .map(mix => {
+                const [id, qty] = mix.split(":");
+                const mixProduct = PRODUCTS.find((p) => p.id === id);
+                return `${qty}x ${mixProduct?.name.replace("Risoles ", "") || id}`;
+              })
+              .join(", ");
+            mixText = ` [Isi: ${mixDetails}]`;
           }
           
-          if (packageCount > 0 && remainder === 0) {
-            return `- ${packageCount} Paket ${product?.name ?? item.productId} (Frozen)${mixHint}`;
-          } else if (packageCount > 0 && remainder > 0) {
-            return `- ${packageCount} Paket + ${remainder}x ${product?.name ?? item.productId} (Frozen)${mixHint}`;
-          }
+          return `- ${item.quantity} Box ${product?.name ?? item.productId} (Frozen)${mixText}`;
         }
         
         const variantLabel = item.variant === "ori" ? "Original" : "Frozen";
@@ -384,7 +384,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
                 </label>
                 <textarea
                   rows={2}
-                  placeholder="Contoh: minta saus extra, atau tulis MIX varian untuk paket frozen risoles (cth: 2 mayo, 3 coklat)"
+                  placeholder="Contoh: minta saus extra, jangan pedas, dll"
                   value={formData.catatan}
                   onChange={(e) =>
                     setFormData({ ...formData, catatan: e.target.value })

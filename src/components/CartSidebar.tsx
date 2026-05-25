@@ -150,10 +150,23 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </span>
                         {item.variant === "frozen" && (
                           <span className="text-[9px] bg-secondary/15 text-secondary px-1.5 py-0.5 rounded font-medium">
-                            Min. {FROZEN_MIN_QTY}
+                            Isi {product.frozenBundle?.minQty ?? FROZEN_MIN_QTY}
                           </span>
                         )}
                       </div>
+                      {item.mixSelections && (
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {item.mixSelections.split(",").map((mix) => {
+                            const [id, qty] = mix.split(":");
+                            const mixProduct = getProduct(id);
+                            return (
+                              <span key={id} className="text-[10px] bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded">
+                                {qty}x {mixProduct?.name.replace("Risoles ", "") || id}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
 
                     {/* Quantity + Price Row */}
@@ -162,21 +175,21 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       <div className="flex items-center bg-surface-container-highest rounded-full p-0.5 border border-outline-variant/10">
                         <button
                           onClick={() =>
-                            decrement(item.productId, item.variant)
+                            decrement(item.productId, item.variant, item.mixSelections)
                           }
                           className="w-7 h-7 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
                           aria-label={`Kurangi ${product.name}`}
                         >
-                          <span className="material-symbols-outlined text-sm" title={item.variant === "frozen" && item.quantity === FROZEN_MIN_QTY ? "Hapus dari keranjang" : "Kurangi"}>
-                            {item.variant === "frozen" && item.quantity === FROZEN_MIN_QTY ? "delete" : "remove"}
+                          <span className="material-symbols-outlined text-sm" title={item.variant === "frozen" && item.quantity === 1 ? "Hapus dari keranjang" : "Kurangi"}>
+                            {item.variant === "frozen" && item.quantity === 1 ? "delete" : "remove"}
                           </span>
                         </button>
-                        <span className="w-6 text-center text-xs font-bold tabular-nums">
-                          {item.quantity}
+                        <span className="w-8 text-center text-xs font-bold tabular-nums">
+                          {item.variant === "frozen" ? `${item.quantity} Box` : item.quantity}
                         </span>
                         <button
                           onClick={() =>
-                            increment(item.productId, item.variant)
+                            increment(item.productId, item.variant, item.mixSelections)
                           }
                           className="w-7 h-7 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
                           aria-label={`Tambah ${product.name}`}
@@ -189,7 +202,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
                       {/* Price */}
                       <span className="font-headline font-extrabold text-sm text-primary">
-                        Rp {formatRupiah(product.price * item.quantity)}
+                        Rp {formatRupiah((item.variant === "frozen" && product.frozenBundle ? product.frozenBundle.packPrice : product.price) * item.quantity)}
                       </span>
                     </div>
                   </div>

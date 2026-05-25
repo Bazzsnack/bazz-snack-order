@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useCart, FROZEN_MIN_QTY, type Product, type VariantType } from "@/context/CartContext";
+import { useCart, FROZEN_MIN_QTY } from "@/context/CartContext";
+import type { Product } from "@/data/products";
+import MixVariantModal from "./MixVariantModal";
 
 type ProductCardProps = {
   product: Product;
@@ -10,7 +12,11 @@ type ProductCardProps = {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { getQuantity, increment, decrement, addToCart } = useCart();
-  const [selectedVariant, setSelectedVariant] = useState<VariantType>("ori");
+  const [selectedVariant, setSelectedVariant] = useState<"ori" | "frozen">(
+    product.onlyFrozen ? "frozen" : "ori"
+  );
+  
+  const [isMixModalOpen, setIsMixModalOpen] = useState(false);
 
   const quantity = getQuantity(product.id, selectedVariant);
   const isFrozen = selectedVariant === "frozen";
@@ -56,29 +62,31 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Variant Selector */}
         {product.hasFrozen && (
-          <div className="space-y-2 pt-2">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setSelectedVariant("ori")}
-                className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
-                  selectedVariant === "ori"
-                    ? "bg-primary text-on-primary border-primary"
-                    : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
-                }`}
-              >
-                Original
-              </button>
-              <button
-                onClick={() => setSelectedVariant("frozen")}
-                className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
-                  selectedVariant === "frozen"
-                    ? "bg-secondary text-secondary-container border-secondary"
-                    : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
-                }`}
-              >
-                ❄️ Frozen
-              </button>
-            </div>
+          <div className="flex flex-col gap-2">
+            {!product.onlyFrozen && (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setSelectedVariant("ori")}
+                  className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
+                    selectedVariant === "ori"
+                      ? "bg-primary text-on-primary border-primary"
+                      : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
+                  }`}
+                >
+                  Original
+                </button>
+                <button
+                  onClick={() => setSelectedVariant("frozen")}
+                  className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
+                    selectedVariant === "frozen"
+                      ? "bg-secondary text-secondary-container border-secondary"
+                      : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
+                  }`}
+                >
+                  ❄️ Frozen
+                </button>
+              </div>
+            )}
 
             {/* Frozen info badge — only shows when Frozen is selected */}
             <div
@@ -100,40 +108,64 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Quantity Controls + Add to Cart */}
         <div className="flex items-center justify-between pt-1">
-          {/* Stepper */}
-          <div className="flex items-center bg-surface-container-highest rounded-full p-1 border border-outline-variant/10">
+          {product.id === "risol-mix" ? (
             <button
-              onClick={() => decrement(product.id, selectedVariant)}
-              className="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
-              aria-label={`Decrease ${product.name} ${selectedVariant}`}
+              onClick={() => setIsMixModalOpen(true)}
+              className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-on-primary py-2.5 rounded-xl font-bold transition-all cursor-pointer"
             >
-              <span className="material-symbols-outlined text-sm">
-                {/* Show delete icon when at frozen min qty to hint removal */}
-                {isFrozen && quantity === frozenMinQty ? "delete" : "remove"}
-              </span>
+              Pesan Mix Frozen
             </button>
-            <span className="w-8 text-center text-sm font-bold tabular-nums">
-              {quantity}
-            </span>
-            <button
-              onClick={() => increment(product.id, selectedVariant)}
-              className="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
-              aria-label={`Increase ${product.name} ${selectedVariant}`}
-            >
-              <span className="material-symbols-outlined text-sm">add</span>
-            </button>
-          </div>
+          ) : (
+            <>
+              {/* Stepper */}
+              <div className="flex items-center bg-surface-container-highest rounded-full p-1 border border-outline-variant/10">
+                <button
+                  onClick={() => decrement(product.id, selectedVariant)}
+                  className="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
+                  aria-label={`Decrease ${product.name} ${selectedVariant}`}
+                >
+                  <span className="material-symbols-outlined text-sm">
+                    {/* Show delete icon when at 1 frozen qty to hint removal */}
+                    {isFrozen && quantity === 1 ? "delete" : "remove"}
+                  </span>
+                </button>
+                <span className="w-8 text-center text-sm font-bold tabular-nums">
+                  {isFrozen && quantity > 0 ? `${quantity} Box` : quantity}
+                </span>
+                <button
+                  onClick={() => increment(product.id, selectedVariant)}
+                  className="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
+                  aria-label={`Increase ${product.name} ${selectedVariant}`}
+                >
+                  <span className="material-symbols-outlined text-sm">add</span>
+                </button>
+              </div>
 
-          {/* Add to Cart Button */}
-          <button
-            onClick={() => addToCart(product.id, selectedVariant)}
-            className="bg-primary/10 hover:bg-primary text-primary hover:text-on-primary w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 cursor-pointer"
-            aria-label={`Add ${product.name} ${selectedVariant} to cart`}
-          >
-            <span className="material-symbols-outlined">add_shopping_cart</span>
-          </button>
+              {/* Add to Cart Button */}
+              <button
+                onClick={() => addToCart(product.id, selectedVariant)}
+                className="bg-primary/10 hover:bg-primary text-primary hover:text-on-primary w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 cursor-pointer"
+                aria-label={`Add ${product.name} ${selectedVariant} to cart`}
+              >
+                <span className="material-symbols-outlined">add_shopping_cart</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
+
+      <MixVariantModal
+        isOpen={isMixModalOpen}
+        onClose={() => setIsMixModalOpen(false)}
+        onConfirm={(selections) => {
+          // Convert record to string format: "risol-coklat:2,risol-mayo:3"
+          const mixString = Object.entries(selections)
+            .filter(([_, qty]) => qty > 0)
+            .map(([id, qty]) => `${id}:${qty}`)
+            .join(",");
+          addToCart(product.id, "frozen", mixString);
+        }}
+      />
     </div>
   );
 }

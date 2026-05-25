@@ -8,6 +8,7 @@ export interface Product {
   badge?: string;
   badgeColor?: string;
   hasFrozen?: boolean;
+  onlyFrozen?: boolean;
   frozenBundle?: {
     minQty: number;
     packPrice: number;
@@ -25,6 +26,7 @@ export const products: Product[] = [
     badge: "Baru",
     badgeColor: "bg-primary",
     hasFrozen: true,
+    frozenBundle: { minQty: 5, packPrice: 15000 },
   },
   {
     id: "risol-mayo",
@@ -37,6 +39,7 @@ export const products: Product[] = [
     badge: "Terlaris",
     badgeColor: "bg-secondary",
     hasFrozen: true,
+    frozenBundle: { minQty: 5, packPrice: 15000 },
   },
   {
     id: "risol-mentai",
@@ -47,6 +50,7 @@ export const products: Product[] = [
       "Dilumuri saus mentai spesial yang di-torch sempurna untuk rasa smokey unik.",
     image: "/gambar_produk/risol_mentai.jpeg",
     hasFrozen: true,
+    frozenBundle: { minQty: 5, packPrice: 15000 },
   },
   {
     id: "risol-matcha",
@@ -57,6 +61,20 @@ export const products: Product[] = [
       "Rasa teh hijau Jepang otentik yang dibalut balutan kulit manis dan renyah.",
     image: "/gambar_produk/risol_matcha.png",
     hasFrozen: true,
+    frozenBundle: { minQty: 5, packPrice: 15000 },
+  },
+  {
+    id: "risol-mix",
+    name: "Paket Mix Risoles (Isi 5)",
+    price: 15000,
+    displayPrice: "Rp 15k / Box",
+    description: "Pilih sendiri 5 varian risoles favoritmu dalam satu box frozen.",
+    image: "/gambar_produk/risol_coklat.jpeg", // using generic image
+    badge: "Spesial",
+    badgeColor: "bg-tertiary",
+    hasFrozen: true,
+    onlyFrozen: true,
+    frozenBundle: { minQty: 5, packPrice: 15000 },
   },
   {
     id: "dimsum-box",
