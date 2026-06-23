@@ -12,14 +12,6 @@ export default function HeroSection() {
       <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
         {/* Left Content */}
         <div className="z-10 space-y-8 animate-slide-up">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-highest border border-outline-variant/15">
-            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-            <span className="text-xs font-label uppercase tracking-widest text-secondary">
-              Sekarang Buka Pesanan
-            </span>
-          </div>
-
           {/* Heading */}
           <h1 className="font-headline font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.9]">
             Pusat{" "}
