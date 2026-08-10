@@ -31,10 +31,10 @@ export default function Navbar() {
           className="relative flex items-center shrink-0 w-48 sm:w-64 h-16 origin-left scale-110 sm:scale-125 transition-transform active:scale-95 drop-shadow-[0_0_15px_rgba(255,143,112,0.6)] z-10"
         >
           <Image
-            src="/images/logo_bazzsnack.jpeg"
+            src="/images/logo-new.png"
             alt="Bazz Snack Logo"
             fill
-            className="object-contain object-left mix-blend-screen"
+            className="object-contain object-left"
             priority
           />
         </Link>

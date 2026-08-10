@@ -86,7 +86,7 @@ export const products: Product[] = [
     displayPrice: "Rp 10k",
     description:
       "Paket praktis Dimsum Box isi 10 pcs, include dengan 2 saus lezat dan sumpit, siap disajikan dan dinikmati.",
-    image: "/gambar_produk/dimsum-box.jpg",
+    image: "/gambar_produk/dimsum-box.png",
     hasFrozen: true,
     frozenBundle: {
       minQty: 1,
@@ -127,6 +127,6 @@ export const products: Product[] = [
     displayPrice: "Rp 3k",
     description:
       "Satu tusuk berisi 4 baso kenyal yang dibakar di atas arang hingga gosong sempurna, dilumuri bumbu kacang dan kecap manis yang bikin nagih.",
-    image: "/gambar_produk/baso-bakar.png",
+    image: "/gambar_produk/bakaran.png",
   },
 ];

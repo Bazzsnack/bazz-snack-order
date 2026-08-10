@@ -49,27 +49,26 @@ export const metadata: Metadata = {
     "jajanan mojokerto",
   ],
   openGraph: {
-    title: "Bazz Snack — Risoles, Dimsum & Baso Bakar Kekinian",
-    description:
-      "Jajanan premium kekinian dari Bazz Snack. Risoles, Dimsum, Baso Bakar — tersedia Original & Frozen. Langsung siap antar!",
+    title: "Bazz Snack | Pusat Jajanan Kekinian",
+    description: "Nikmati berbagai pilihan jajanan kekinian dan frozen food berkualitas dari Bazz Snack. Ada risoles, dimsum, kebab, dan masih banyak lagi!",
     type: "website",
     locale: "id_ID",
     siteName: "Bazz Snack",
-    url: "https://bazz-snack.vercel.app",
+    url: "https://bazz-snack.vercel.app/",
     images: [
       {
-        url: "https://bazz-snack.vercel.app/images/og_preview.png",
+        url: "https://bazz-snack.vercel.app/images/logo-new.png",
         width: 1200,
         height: 630,
-        alt: "Preview Menu Bazz Snack — Risoles, Dimsum, Baso Bakar",
+        alt: "Bazz Snack Logo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bazz Snack — Risoles, Dimsum & Baso Bakar Kekinian",
-    description:
-      "Jajanan premium kekinian dari Bazz Snack Mojokerto. Pesan langsung via WhatsApp!",
+    title: "Bazz Snack | Pusat Jajanan Kekinian",
+    description: "Nikmati berbagai pilihan jajanan kekinian dan frozen food berkualitas dari Bazz Snack. Ada risoles, dimsum, kebab, dan masih banyak lagi!",
+    images: ["https://bazz-snack.vercel.app/images/logo-new.png"],
   },
   alternates: {
     canonical: "https://bazz-snack.vercel.app",
