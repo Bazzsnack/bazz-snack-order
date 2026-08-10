@@ -80,6 +80,22 @@ export const products: Product[] = [
     frozenBundle: { minQty: 5, packPrice: 15000 },
   },
   {
+    id: "kebab",
+    name: "Kebab",
+    price: 3000,
+    displayPrice: "Rp 3k",
+    description:
+      "Kebab lezat dengan isian daging gurih dan saus spesial, dibalut tortilla lembut yang pas untuk camilan.",
+    image: "/gambar_produk/kebab.png",
+    badge: "Baru",
+    badgeColor: "bg-primary",
+    hasFrozen: true,
+    frozenBundle: {
+      minQty: 5,
+      packPrice: 15000,
+    },
+  },
+  {
     id: "dimsum-box",
     name: "Dimsum Box",
     price: 10000,
