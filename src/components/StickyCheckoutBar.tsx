@@ -192,8 +192,9 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
 
       {/* Checkout Modal Overlay */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="bg-surface-container-low border border-outline-variant/15 w-full max-w-md p-6 rounded-[2rem] shadow-2xl relative animate-slide-up overflow-y-auto max-h-[90vh]">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <div className="bg-surface-container-low border border-outline-variant/15 w-full max-w-md p-6 rounded-[2rem] shadow-2xl relative animate-slide-up">
 
             {/* Close Button */}
             <button
@@ -427,6 +428,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
               </button>
 
             </form>
+            </div>
           </div>
         </div>
       )}
