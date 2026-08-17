@@ -1,3 +1,5 @@
+"use client";
+
 export default function Footer() {
   return (
     <footer className="relative bg-[#1A1A1A] w-full pt-16 pb-8 border-t-[8px] border-primary">
