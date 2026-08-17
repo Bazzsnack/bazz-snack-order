@@ -7,7 +7,7 @@ import ProductSection from "@/components/ProductSection";
 
 export default function Home() {
   return (
-    <main className="pt-20 pb-32">
+    <main className="pb-32">
       <div id="home">
         <HeroSection />
       </div>
