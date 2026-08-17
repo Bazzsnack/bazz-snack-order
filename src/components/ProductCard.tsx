@@ -4,22 +4,21 @@ import Image from "next/image";
 import { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 
-export default function ProductCard({ product }: { product: Product }) {
-  const { addToCart } = useCart();
+export default function ProductCard({ product, onMixClick }: { product: Product; onMixClick?: () => void }) {
+  const { addToCart, decrement } = useCart();
   const isMixPackage = product.id === "risol-mix";
 
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (isMixPackage) {
-      // Trigger modal logic by simulating a click on the card, or handle it via a context
-      // Since clicking the card already does this in the current setup, we just let the parent handle it
+    if (isMixPackage && onMixClick) {
+      onMixClick();
     } else {
       addToCart(product.id, "ori");
     }
   };
 
   return (
-    <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-outline-variant hover:shadow-xl transition-shadow group flex flex-col h-full relative cursor-pointer">
+    <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-outline-variant hover:shadow-xl transition-shadow group flex flex-col h-full relative">
       {/* Badge */}
       {product.badge && (
         <div className="absolute top-4 left-4 z-10 bg-primary text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-md">
@@ -56,15 +55,32 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="font-headline font-bold text-2xl text-primary">
             {product.displayPrice}
           </span>
-          <button
-            onClick={handleAdd}
-            className="w-10 h-10 rounded-full border-2 border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
-            aria-label="Tambah ke keranjang"
-          >
-            <span className="material-symbols-outlined text-xl font-bold">
-              {isMixPackage ? "tune" : "add"}
-            </span>
-          </button>
+          <div className="flex items-center gap-2">
+            {!isMixPackage && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  decrement(product.id, "ori");
+                }}
+                className="w-10 h-10 rounded-full border-2 border-outline-variant text-on-surface-variant flex items-center justify-center hover:bg-surface-container-highest hover:text-primary transition-colors"
+                aria-label="Kurangi pesanan"
+              >
+                <span className="material-symbols-outlined text-xl font-bold">
+                  remove
+                </span>
+              </button>
+            )}
+            <button
+              onClick={handleAdd}
+              className="w-10 h-10 rounded-full border-2 border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+              aria-label="Tambah ke keranjang"
+            >
+              <span className="material-symbols-outlined text-xl font-bold">
+                {isMixPackage ? "tune" : "add"}
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

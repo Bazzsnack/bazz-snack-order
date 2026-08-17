@@ -9,8 +9,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8 mb-12">
           
           {/* Column 1: Brand */}
-          <div className="flex flex-col gap-4">
-            <div className="relative w-40 h-14">
+          <div className="flex flex-col gap-1">
+            <div className="relative w-56 h-20">
               <Image 
                 src="/images/logo-new.png" 
                 alt="Bazz Snack" 
@@ -18,7 +18,7 @@ export default function Footer() {
                 className="object-contain object-left" 
               />
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed max-w-sm mt-2">
+            <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
               Pusat snack kekinian dengan cita rasa premium. Dipercaya ratusan pelanggan sejak 2024.
             </p>
           </div>
@@ -56,14 +56,6 @@ export default function Footer() {
             </ul>
           </div>
 
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-800 gap-4 text-xs text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Bazz Snack. Hak Cipta Dilindungi.</p>
-          <div className="flex items-center gap-1 font-semibold text-gray-400">
-            Dibuat dengan <span className="text-primary mx-1 text-sm">♥</span> untuk Mojokerto
-          </div>
         </div>
       </div>
     </footer>

@@ -55,17 +55,8 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Actions (Cart + CTA + Hamburger) */}
-        <div className="flex items-center gap-4 z-10">
-          {/* CTA Order Now */}
-          <a
-            href="#menu"
-            className="hidden md:inline-flex bg-primary text-white font-bold uppercase tracking-wide px-6 py-2.5 rounded-full hover:bg-primary-dim transition-colors text-sm"
-          >
-            Order Now <span className="material-symbols-outlined text-sm ml-1">arrow_forward</span>
-          </a>
-
-          <button
+        {/* Actions (Cart + Hamburger) */}
+        <div className="flex items-center gap-4 z-10">          <button
             onClick={openSidebar}
             className="relative p-2 text-gray-700 hover:text-primary transition-colors flex items-center justify-center bg-gray-100 rounded-full"
             aria-label="Keranjang Belanja"

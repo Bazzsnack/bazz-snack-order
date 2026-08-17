@@ -23,16 +23,11 @@ export default function ProductSection({ limit }: { limit?: number }) {
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {(limit ? displayProducts.slice(0, limit) : displayProducts).map((product) => (
-          <div
-            key={product.id}
-            onClick={() => {
-              if (product.id === "risol-mix") {
-                setIsMixModalOpen(true);
-              }
-            }}
-            className={product.id === "risol-mix" ? "cursor-pointer" : ""}
-          >
-            <ProductCard product={product} />
+          <div key={product.id}>
+            <ProductCard 
+              product={product} 
+              onMixClick={product.id === "risol-mix" ? () => setIsMixModalOpen(true) : undefined}
+            />
           </div>
         ))}
       </div>
