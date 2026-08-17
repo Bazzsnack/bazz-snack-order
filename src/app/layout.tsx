@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Manrope, Oswald } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import { CartSidebarProvider } from "@/context/CartSidebarContext";
 import Navbar from "@/components/Navbar";
@@ -7,27 +6,6 @@ import Footer from "@/components/Footer";
 import StickyCheckoutBar from "@/components/StickyCheckoutBar";
 import CartSidebarWrapper from "@/components/CartSidebarWrapper";
 import "./globals.css";
-
-const oswald = Oswald({
-  subsets: ["latin"],
-  variable: "--font-headline",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
@@ -208,7 +186,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${oswald.variable} ${plusJakarta.variable} ${manrope.variable} dark antialiased`}
+      className="dark antialiased"
     >
       <head>
         <link

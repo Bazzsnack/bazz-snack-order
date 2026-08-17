@@ -18,7 +18,7 @@ export default function PromoBanner() {
 
           {/* Absolute Positioned Join Now Button */}
           {/* Posisi disesuaikan agar pas di bawah teks bawaan gambar */}
-          <div className="absolute top-[75%] sm:top-[70%] lg:top-[68%] left-[65%] sm:left-[70%] lg:left-[72%] transform -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute top-[78%] sm:top-[70%] lg:top-[68%] right-[8%] sm:right-[12%] lg:right-[15%] transform -translate-y-1/2">
             <a
               href="#"
               className="inline-flex justify-center items-center h-10 sm:h-12 lg:h-14 px-6 sm:px-8 lg:px-10 rounded-full bg-primary text-white font-bold text-xs sm:text-sm lg:text-base uppercase tracking-wider hover:bg-orange-600 hover:scale-105 hover:shadow-xl transition-all duration-300 shadow-lg shadow-primary/30"
