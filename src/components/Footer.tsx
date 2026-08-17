@@ -3,32 +3,44 @@
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
-// Deterministic pseudo-random path generator for torn paper effect
+// Organic smooth torn paper path generator using overlapping sine waves
 const getTornPath = (seed: number, segments: number, baseHeight: number, variance: number) => {
   let d = `M0,30 `;
   for (let i = 0; i <= segments; i++) {
-    const x = (i / segments) * 1000;
-    const rand = Math.sin(seed * (i + 1) * 12.9898) * 43758.5453;
-    const noise = rand - Math.floor(rand);
-    const newY = baseHeight + (noise * 2 - 1) * variance;
-    d += `L${x.toFixed(1)},${newY.toFixed(1)} `;
+    const x = (i / segments) * 100; // 0 to 100 scale
+    
+    // Combine multiple frequencies for natural jaggedness
+    const wave1 = Math.sin(x * 0.2 + seed) * 0.5;        // Large hills
+    const wave2 = Math.cos(x * 0.45 + seed * 1.5) * 0.25;  // Medium bumps
+    const wave3 = Math.sin(x * 1.5 + seed * 3) * 0.15;     // Small tears
+    const wave4 = Math.cos(x * 3.5 + seed * 5) * 0.1;      // Micro jaggedness
+    
+    const noise = wave1 + wave2 + wave3 + wave4;
+    const newY = baseHeight + noise * variance;
+    
+    d += `L${(x * 10).toFixed(1)},${newY.toFixed(1)} `;
   }
   d += `L1000,30 Z`;
   return d;
 };
 
-const TornEdge = () => (
-  <div className="absolute top-0 left-0 w-full h-8 sm:h-12 -translate-y-[99%] overflow-hidden pointer-events-none">
-    {/* Orange torn border layer */}
-    <svg viewBox="0 0 1000 30" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full text-primary fill-current drop-shadow-sm">
-      <path d={getTornPath(1.23, 180, 12, 10)} />
-    </svg>
-    {/* Dark gray footer layer overlapping */}
-    <svg viewBox="0 0 1000 30" preserveAspectRatio="none" className="absolute bottom-[-1px] w-full h-[80%] text-[#1A1A1A] fill-current drop-shadow-md">
-      <path d={getTornPath(4.56, 220, 14, 8)} />
-    </svg>
-  </div>
-);
+const TornEdge = () => {
+  // Use a single path to ensure the orange border is perfectly parallel to the dark gray paper
+  const path = getTornPath(1.23, 300, 15, 8);
+  
+  return (
+    <div className="absolute top-0 left-0 w-full h-8 sm:h-12 -translate-y-[99%] overflow-hidden pointer-events-none">
+      {/* Orange torn border layer (shifted up slightly) */}
+      <svg viewBox="0 0 1000 30" preserveAspectRatio="none" className="absolute bottom-[2px] sm:bottom-[3px] w-full h-[90%] text-primary fill-current drop-shadow-sm">
+        <path d={path} />
+      </svg>
+      {/* Dark gray footer layer */}
+      <svg viewBox="0 0 1000 30" preserveAspectRatio="none" className="absolute bottom-[-1px] w-full h-[90%] text-[#1A1A1A] fill-current drop-shadow-md">
+        <path d={path} />
+      </svg>
+    </div>
+  );
+};
 
 export default function Footer() {
   return (
