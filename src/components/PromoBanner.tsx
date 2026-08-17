@@ -7,7 +7,7 @@ export default function PromoBanner() {
   return (
     <section className="py-12 px-6 max-w-7xl mx-auto">
       <ScrollReveal>
-        <div className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl bg-white group">
+        <div className="relative w-full max-w-5xl mx-auto bg-white group">
           
           {/* Full Image with Multiply blend mode to remove dirty background */}
           <img

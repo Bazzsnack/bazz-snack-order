@@ -52,17 +52,16 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Desktop Nav Links */}
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 z-10">
           <Link
             href="#home"
-            className="text-on-surface hover:text-primary font-medium transition-all text-sm uppercase tracking-wider"
+            className="text-black hover:text-primary font-medium transition-all text-sm uppercase tracking-wider"
           >
             Home
           </Link>
           <Link
             href="#menu"
-            className="text-on-surface hover:text-primary font-medium transition-all text-sm uppercase tracking-wider"
+            className="text-black hover:text-primary font-medium transition-all text-sm uppercase tracking-wider"
           >
             Menu
           </Link>
@@ -71,7 +70,7 @@ export default function Navbar() {
         {/* Actions (Cart + Hamburger) */}
         <div className="flex items-center gap-4 z-10">          <button
             onClick={openSidebar}
-            className="relative p-2 text-gray-700 hover:text-primary transition-colors flex items-center justify-center bg-gray-100 rounded-full"
+            className="relative p-2 text-black hover:text-primary transition-colors flex items-center justify-center bg-gray-100 rounded-full"
             aria-label="Keranjang Belanja"
           >
             <span className="material-symbols-outlined text-2xl">
@@ -107,14 +106,14 @@ export default function Navbar() {
           <Link
             href="#home"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-medium text-on-surface hover:text-primary transition-colors border-b border-outline-variant pb-2 uppercase"
+            className="text-lg font-medium text-black hover:text-primary transition-colors border-b border-outline-variant pb-2 uppercase"
           >
             Home
           </Link>
           <Link
             href="#menu"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-lg font-medium text-on-surface hover:text-primary transition-colors border-b border-outline-variant pb-2 uppercase"
+            className="text-lg font-medium text-black hover:text-primary transition-colors border-b border-outline-variant pb-2 uppercase"
           >
             Menu
           </Link>
