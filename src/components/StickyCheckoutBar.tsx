@@ -227,7 +227,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
                     onChange={(e) =>
                       setFormData({ ...formData, tanggal: e.target.value })
                     }
-                    className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-white appearance-none [color-scheme:dark]"
+                    className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-black appearance-none [color-scheme:light]"
                   />
                 </div>
                 {minDateInfo.isCutoff ? (
@@ -253,7 +253,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
                   placeholder="Nama lengkap"
                   value={formData.nama}
                   onChange={(e) => setFormData({ ...formData, nama: e.target.value })}
-                  className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-white"
+                  className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-black"
                 />
               </div>
 
@@ -266,7 +266,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
                   placeholder="08123456789"
                   value={formData.nomor}
                   onChange={(e) => setFormData({ ...formData, nomor: e.target.value })}
-                  className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-white"
+                  className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl focus:border-primary focus:outline-none transition-colors text-black"
                 />
               </div>
 
@@ -304,7 +304,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
                     <div className="text-center">
                       <p
                         className={`text-sm font-bold transition-colors ${
-                          deliveryOption === "pickup" ? "text-white" : "text-on-surface-variant"
+                          deliveryOption === "pickup" ? "text-primary" : "text-on-surface-variant"
                         }`}
                       >
                         Ambil di Tempat
@@ -342,7 +342,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
                     <div className="text-center">
                       <p
                         className={`text-sm font-bold transition-colors ${
-                          deliveryOption === "delivery" ? "text-white" : "text-on-surface-variant"
+                          deliveryOption === "delivery" ? "text-primary" : "text-on-surface-variant"
                         }`}
                       >
                         Diantar
@@ -370,7 +370,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
                     onChange={(e) =>
                       setFormData({ ...formData, alamat: e.target.value })
                     }
-                    className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl resize-none focus:border-primary focus:outline-none transition-colors text-white"
+                    className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl resize-none focus:border-primary focus:outline-none transition-colors text-black"
                   />
                   <span className="text-[11px] text-secondary flex items-center gap-1 mt-1">
                     <span className="material-symbols-outlined text-secondary text-sm">info</span>
@@ -391,7 +391,7 @@ ${pengirimanInfo}${formData.catatan ? `\n\n📝 Catatan:\n${formData.catatan}` :
                   onChange={(e) =>
                     setFormData({ ...formData, catatan: e.target.value })
                   }
-                  className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl resize-none focus:border-primary focus:outline-none transition-colors text-white"
+                  className="w-full bg-surface-container-highest border border-outline-variant/15 p-3 rounded-xl resize-none focus:border-primary focus:outline-none transition-colors text-black"
                 />
               </div>
 
