@@ -28,16 +28,16 @@ export default function ProductCard({ product }: { product: Product }) {
       )}
 
       {/* Image Area */}
-      <div className="relative h-48 w-full bg-surface-variant rounded-t-3xl overflow-hidden p-4">
+      <div className="relative h-52 w-full overflow-hidden">
         {/* Decorative shadow inside the image area */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10" />
         <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-500 z-0">
           <Image
             src={Array.isArray(product.image) ? product.image[0] : product.image}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-contain drop-shadow-xl"
+            className="object-cover"
           />
         </div>
       </div>
