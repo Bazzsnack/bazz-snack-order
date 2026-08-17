@@ -28,6 +28,7 @@ export const products: Product[] = [
     hasFrozen: true,
     frozenBundle: { minQty: 5, packPrice: 15000 },
   },
+  /*
   {
     id: "risol-mayo",
     name: "Risoles Mayo",
@@ -79,21 +80,18 @@ export const products: Product[] = [
     hasFrozen: true,
     frozenBundle: { minQty: 5, packPrice: 15000 },
   },
+  */
   {
     id: "kebab",
     name: "Kebab",
-    price: 3000,
-    displayPrice: "Rp 3k",
+    price: 10000,
+    displayPrice: "Rp 10k",
     description:
-      "Kebab lezat dengan isian daging gurih dan saus spesial, dibalut tortilla lembut yang pas untuk camilan.",
+      "Kebab lezat dengan isian daging gurih dan saus spesial, dibalut tortilla lembut. Harga Rp 10.000 dapat 3 kebab.",
     image: "/gambar_produk/kebab.png",
     badge: "Baru",
     badgeColor: "bg-primary",
     hasFrozen: true,
-    frozenBundle: {
-      minQty: 5,
-      packPrice: 15000,
-    },
   },
   {
     id: "dimsum-box",
@@ -112,24 +110,20 @@ export const products: Product[] = [
   {
     id: "dimsum-keju",
     name: "Dimsum Keju",
-    price: 2000,
-    displayPrice: "Rp 2k",
+    price: 10000,
+    displayPrice: "Rp 10k",
     description:
-      "Dimsum ayam gurih dengan topping keju leleh yang lumer di mulut. Sensasi creamy dan gurih dalam satu gigitan!",
+      "Dimsum ayam gurih dengan topping keju leleh yang lumer di mulut. Harga Rp 10.000 dapat 5 pcs include sauce.",
     image: "/gambar_produk/dimsum-keju.png",
     badge: "Populer",
     badgeColor: "bg-primary",
     hasFrozen: true,
-    frozenBundle: {
-      minQty: 7,
-      packPrice: 15000,
-    },
   },
   {
     id: "dimsum-mentai",
     name: "Dimsum Mentai",
-    price: 23000,
-    displayPrice: "Rp 23k",
+    price: 25000,
+    displayPrice: "Rp 25k",
     description:
       "Dimsum ayam kukus premium yang diselimuti saus mentai racikan rahasia, dibakar (di-torch) hingga menghasilkan aroma smokey yang wangi dan lumer di mulut.",
     image: "/gambar_produk/dimsum-mentai.png",
@@ -137,12 +131,12 @@ export const products: Product[] = [
     badgeColor: "bg-secondary",
   },
   {
-    id: "baso-bakar",
-    name: "Baso Bakar",
-    price: 3000,
-    displayPrice: "Rp 3k",
+    id: "bakaran",
+    name: "Bakaran",
+    price: 10000,
+    displayPrice: "Rp 10k",
     description:
-      "Satu tusuk berisi 4 baso kenyal yang dibakar di atas arang hingga gosong sempurna, dilumuri bumbu kacang dan kecap manis yang bikin nagih.",
+      "Harga Rp 10.000 dapat 4 tusuk bakaran kenyal yang dibakar di atas arang hingga gosong sempurna, dilumuri bumbu kacang dan kecap manis.",
     image: "/gambar_produk/bakaran.png",
   },
 ];
