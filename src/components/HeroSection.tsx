@@ -49,7 +49,7 @@ export default function HeroSection() {
           {/* Image Card */}
           <div className="relative rounded-[2rem] overflow-hidden aspect-square border-4 border-surface-container-highest animate-float-hero">
             <Image
-              src="/gambar_produk/risol-new.png"
+              src="/gambar_produk/risol_coklat.jpeg"
               alt="Signature Risoles"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
