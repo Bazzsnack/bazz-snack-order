@@ -54,19 +54,18 @@ export default function Navbar() {
 
         {/* Desktop Nav Links */}
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 z-10">
-          {NAV_LINKS.map((link) => {
-            // For a single page app, active state based on pathname isn't very useful unless we track scroll.
-            // Removing strict border-b-2 for now to avoid it always being stuck on Beranda.
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-on-surface hover:text-primary font-bold transition-all text-sm uppercase tracking-wider"
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          <Link
+            href="#home"
+            className="text-on-surface hover:text-primary font-medium transition-all text-sm uppercase tracking-wider"
+          >
+            Home
+          </Link>
+          <Link
+            href="#menu"
+            className="text-on-surface hover:text-primary font-medium transition-all text-sm uppercase tracking-wider"
+          >
+            Menu
+          </Link>
         </div>
 
         {/* Actions (Cart + Hamburger) */}
@@ -105,18 +104,20 @@ export default function Navbar() {
         }`}
       >
         <div className="flex flex-col px-6 gap-6 py-8">
-          {NAV_LINKS.map((link) => {
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-bold text-on-surface hover:text-primary transition-colors border-b border-outline-variant pb-2 uppercase"
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          <Link
+            href="#home"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-lg font-medium text-on-surface hover:text-primary transition-colors border-b border-outline-variant pb-2 uppercase"
+          >
+            Home
+          </Link>
+          <Link
+            href="#menu"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-lg font-medium text-on-surface hover:text-primary transition-colors border-b border-outline-variant pb-2 uppercase"
+          >
+            Menu
+          </Link>
         </div>
       </div>
     </nav>

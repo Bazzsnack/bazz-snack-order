@@ -64,9 +64,10 @@
   --color-inverse-on-surface: #f9fafb;
   --color-inverse-primary: #fdba9b;
 
-  --font-headline: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-label: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-headline: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-label: var(--font-sans);
 }
 
 /* Custom Utilities */
