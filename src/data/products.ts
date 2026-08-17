@@ -17,70 +17,16 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    id: "risol-coklat",
-    name: "Risoles Coklat",
-    price: 3000,
-    displayPrice: "Rp 3k",
-    description: "Lumeran coklat premium dalam balutan kulit krispi yang gurih.",
-    image: "/gambar_produk/risol_coklat.jpeg",
-    badge: "Baru",
-    badgeColor: "bg-primary",
-    hasFrozen: true,
-    frozenBundle: { minQty: 5, packPrice: 15000 },
-  },
-  /*
-  {
-    id: "risol-mayo",
-    name: "Risoles Mayo",
-    price: 3000,
-    displayPrice: "Rp 3k",
-    description:
-      "Perpaduan creamy mayonnaise, smoked beef, dan telur berkualitas pilihan.",
-    image: "/gambar_produk/risol_mayo.jpeg",
-    badge: "Terlaris",
-    badgeColor: "bg-secondary",
-    hasFrozen: true,
-    frozenBundle: { minQty: 5, packPrice: 15000 },
-  },
-  {
-    id: "risol-mentai",
-    name: "Risoles Mentai",
-    price: 3000,
-    displayPrice: "Rp 3k",
-    description:
-      "Dilumuri saus mentai spesial yang di-torch sempurna untuk rasa smokey unik.",
-    image: "/gambar_produk/risol_mentai.jpeg",
-    hasFrozen: true,
-    frozenBundle: { minQty: 5, packPrice: 15000 },
-  },
-  {
-    id: "risol-matcha",
-    name: "Risoles Matcha",
-    price: 3000,
-    displayPrice: "Rp 3k",
-    description:
-      "Rasa teh hijau Jepang otentik yang dibalut balutan kulit manis dan renyah.",
-    image: "/gambar_produk/risol_matcha.png",
-    hasFrozen: true,
-    frozenBundle: { minQty: 5, packPrice: 15000 },
-  },
-  {
-    id: "risol-mix",
-    name: "Paket Mix Risoles (Isi 5)",
+    id: "risoles",
+    name: "Risoles",
     price: 15000,
-    displayPrice: "Rp 15k / Box",
-    description: "Pilih sendiri 5 varian risoles favoritmu dalam satu box.",
-    image: [
-      "/gambar_produk/risol_mentai.jpeg",
-      "/gambar_produk/risol_coklat.jpeg",
-      "/gambar_produk/risol_mayo.jpeg",
-    ],
+    displayPrice: "Rp 15k / 5 pcs",
+    description: "Nikmati berbagai pilihan rasa risoles favoritmu (bisa di-mix) dalam satu box yang menggugah selera.",
+    image: "/gambar_produk/risol-new.png",
     badge: "Spesial",
     badgeColor: "bg-tertiary",
     hasFrozen: true,
-    frozenBundle: { minQty: 5, packPrice: 15000 },
   },
-  */
   {
     id: "kebab",
     name: "Kebab",
