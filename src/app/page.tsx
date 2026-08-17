@@ -3,7 +3,7 @@
 import HeroSection from "@/components/HeroSection";
 import PromoBanner from "@/components/PromoBanner";
 import ProductSection from "@/components/ProductSection";
-import ReviewsSection from "@/components/ReviewsSection";
+
 
 export default function Home() {
   return (
@@ -17,9 +17,7 @@ export default function Home() {
         <PromoBanner />
       </div>
 
-      <div id="ulasan">
-        <ReviewsSection />
-      </div>
+
     </main>
   );
 }

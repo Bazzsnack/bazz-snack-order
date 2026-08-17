@@ -10,7 +10,6 @@ import { useCartSidebar } from "@/context/CartSidebarContext";
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "Menu", href: "#menu" },
-  { label: "Ulasan", href: "#ulasan" },
 ];
 
 export default function Navbar() {
