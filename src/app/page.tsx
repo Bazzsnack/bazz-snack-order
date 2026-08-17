@@ -10,11 +10,11 @@ export default function Home() {
     <main className="pt-20 pb-32">
       <div id="home">
         <HeroSection />
-        <PromoBanner />
       </div>
       
       <div id="menu">
         <ProductSection />
+        <PromoBanner />
       </div>
 
       <div id="ulasan">

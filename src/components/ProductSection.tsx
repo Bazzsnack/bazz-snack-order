@@ -16,9 +16,7 @@ export default function ProductSection({ limit }: { limit?: number }) {
       {/* Header */}
       <div className="flex flex-col items-center justify-center mb-16 text-center">
         <h2 className="font-headline font-bold text-4xl md:text-5xl tracking-tight text-on-surface uppercase flex items-center gap-4">
-          <span className="text-primary text-3xl hidden md:inline">➔</span>
           MENU FAVORIT
-          <span className="text-primary text-3xl hidden md:inline">🡄</span>
         </h2>
       </div>
 
@@ -39,17 +37,7 @@ export default function ProductSection({ limit }: { limit?: number }) {
         ))}
       </div>
 
-      {/* Bottom CTA */}
-      {!limit && (
-        <div className="mt-16 flex justify-center">
-          <a
-            href="#home"
-            className="inline-flex justify-center items-center h-14 px-8 rounded-full bg-primary text-white font-bold text-sm uppercase tracking-wider hover:bg-primary-dim transition-colors shadow-lg"
-          >
-            KEMBALI KE ATAS <span className="material-symbols-outlined ml-2 text-sm">arrow_upward</span>
-          </a>
-        </div>
-      )}
+
 
       {/* Modal for Mix Packages */}
       <MixVariantModal

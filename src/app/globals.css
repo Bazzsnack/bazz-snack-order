@@ -40,28 +40,28 @@
   --color-on-error: #ffffff;
   --color-on-error-container: #991b1b;
 
-  /* Surfaces: Light Theme */
-  --color-surface: #ffffff;
-  --color-surface-dim: #f9fafb;
-  --color-surface-bright: #ffffff;
+  /* Surfaces: Dark Theme */
+  --color-surface: #1a1a1a;
+  --color-surface-dim: #121212;
+  --color-surface-bright: #2a2a2a;
   --color-surface-tint: #e6571e;
-  --color-surface-variant: #f3f4f6;
-  --color-surface-container: #f9fafb;
-  --color-surface-container-low: #ffffff;
-  --color-surface-container-high: #e5e7eb;
-  --color-surface-container-highest: #d1d5db;
-  --color-surface-container-lowest: #ffffff;
+  --color-surface-variant: #2d2d2d;
+  --color-surface-container: #1f1f1f;
+  --color-surface-container-low: #141414;
+  --color-surface-container-high: #2b2b2b;
+  --color-surface-container-highest: #363636;
+  --color-surface-container-lowest: #0f0f0f;
   
-  --color-on-surface: #111827;
-  --color-on-surface-variant: #4b5563;
-  --color-on-background: #111827;
-  --color-background: #fdfdfd;
+  --color-on-surface: #f3f4f6;
+  --color-on-surface-variant: #d1d5db;
+  --color-on-background: #f3f4f6;
+  --color-background: #121212;
 
-  --color-outline: #d1d5db;
-  --color-outline-variant: #e5e7eb;
+  --color-outline: #4b5563;
+  --color-outline-variant: #374151;
 
-  --color-inverse-surface: #111827;
-  --color-inverse-on-surface: #f9fafb;
+  --color-inverse-surface: #f3f4f6;
+  --color-inverse-on-surface: #1f1f1f;
   --color-inverse-primary: #fdba9b;
 
   --font-headline: "Oswald", sans-serif;
@@ -75,17 +75,17 @@
 }
 
 .glass-nav {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(18, 18, 18, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-dock {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(18, 18, 18, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .snack-card-shadow {
