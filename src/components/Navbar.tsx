@@ -70,7 +70,7 @@ export default function Navbar() {
         {/* Actions (Cart + Hamburger) */}
         <div className="flex items-center gap-4 z-10">          <button
             onClick={openSidebar}
-            className="relative p-2 text-black hover:text-primary transition-colors flex items-center justify-center bg-gray-100 rounded-full"
+            className="relative p-2 text-black hover:text-primary transition-colors flex items-center justify-center"
             aria-label="Keranjang Belanja"
           >
             <span className="material-symbols-outlined text-2xl">
