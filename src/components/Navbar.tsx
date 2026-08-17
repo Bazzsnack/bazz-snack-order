@@ -8,7 +8,7 @@ import { useCart } from "@/context/CartContext";
 import { useCartSidebar } from "@/context/CartSidebarContext";
 
 const NAV_LINKS = [
-  { label: "Beranda", href: "#home" },
+  { label: "Home", href: "#home" },
   { label: "Menu", href: "#menu" },
   { label: "Ulasan", href: "#ulasan" },
 ];
@@ -22,13 +22,13 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      className="fixed top-0 w-full z-50 glass-nav shadow-[0_1px_20px_rgba(255,143,112,0.05)]"
+      className="fixed top-0 w-full z-50 glass-nav"
     >
       <div className="flex justify-between items-center h-20 px-6 max-w-7xl mx-auto w-full font-headline tracking-tight relative bg-transparent">
         {/* Logo */}
         <Link
           href="#home"
-          className="relative flex items-center shrink-0 w-48 sm:w-64 h-16 origin-left scale-110 sm:scale-125 transition-transform active:scale-95 drop-shadow-[0_0_15px_rgba(255,143,112,0.6)] z-10"
+          className="relative flex items-center shrink-0 w-40 sm:w-52 h-14 origin-left transition-transform active:scale-95 z-10"
         >
           <Image
             src="/images/logo-new.png"
@@ -48,7 +48,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-300 hover:text-white hover:font-bold transition-all"
+                className="text-on-surface hover:text-primary font-bold transition-all text-sm uppercase tracking-wider"
               >
                 {link.label}
               </Link>
@@ -56,12 +56,19 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Actions (Cart + Hamburger) */}
+        {/* Actions (Cart + CTA + Hamburger) */}
         <div className="flex items-center gap-4 z-10">
-          {/* Cart Icon */}
+          {/* CTA Order Now */}
+          <a
+            href="#menu"
+            className="hidden md:inline-flex bg-primary text-white font-bold uppercase tracking-wide px-6 py-2.5 rounded-full hover:bg-primary-dim transition-colors text-sm"
+          >
+            Order Now <span className="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+          </a>
+
           <button
             onClick={openSidebar}
-            className="relative text-white hover:text-primary transition-all active:scale-90 cursor-pointer"
+            className="relative p-2 text-gray-700 hover:text-primary transition-colors flex items-center justify-center bg-gray-100 rounded-full"
             aria-label="Keranjang Belanja"
           >
             <span className="material-symbols-outlined text-2xl">
@@ -74,10 +81,10 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Hamburger (Mobile Only) */}
+          {/* Mobile Hamburger */}
           <button
+            className="md:hidden p-2 text-gray-700"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden relative text-white hover:text-primary transition-all active:scale-90 cursor-pointer"
             aria-label="Toggle Menu"
           >
             <span className="material-symbols-outlined text-3xl">
@@ -89,18 +96,18 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       <div
-        className={`md:hidden absolute top-20 left-0 w-full bg-[#1A1A1A] border-b border-outline-variant/10 shadow-xl transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? "max-h-64 py-4" : "max-h-0 py-0"
+        className={`md:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 shadow-xl transition-all duration-300 origin-top overflow-hidden z-40 ${
+          isMobileMenuOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0"
         }`}
       >
-        <div className="flex flex-col px-6 gap-6">
+        <div className="flex flex-col px-6 gap-6 py-8">
           {NAV_LINKS.map((link) => {
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-bold text-gray-300 hover:text-primary transition-colors border-b border-white/5 pb-2"
+                className="text-lg font-bold text-on-surface hover:text-primary transition-colors border-b border-outline-variant pb-2 uppercase"
               >
                 {link.label}
               </Link>

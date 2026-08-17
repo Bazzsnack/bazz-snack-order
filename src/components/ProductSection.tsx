@@ -1,71 +1,71 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { PRODUCTS } from "@/context/CartContext";
 import ProductCard from "./ProductCard";
+import MixVariantModal from "./MixVariantModal";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductSection({ limit }: { limit?: number }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = 320;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
+  const [isMixModalOpen, setIsMixModalOpen] = useState(false);
+  const { addToCart } = useCart();
   const displayProducts = PRODUCTS.filter(p => !p.isHidden);
 
   return (
     <section id="menu" className="py-24 px-6 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-        <div>
-          <h2 className="font-headline font-extrabold text-4xl md:text-5xl tracking-tight mb-4 text-white">
-            Menu <span className="text-primary italic">Andalan</span> Kami
-          </h2>
-          <p className="text-on-surface-variant max-w-lg">
-            Dibuat langsung dengan bahan-bahan pilihan dan resep rahasia Bazz Snack yang bikin nagih.
-          </p>
-        </div>
-
-        {/* Scroll Arrows (Desktop) */}
-        <div className="hidden lg:flex gap-2">
-          <button
-            onClick={() => scroll("left")}
-            className="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-all"
-            aria-label="Scroll left"
-          >
-            <span className="material-symbols-outlined">chevron_left</span>
-          </button>
-          <button
-            onClick={() => scroll("right")}
-            className="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-all"
-            aria-label="Scroll right"
-          >
-            <span className="material-symbols-outlined">chevron_right</span>
-          </button>
-        </div>
+      <div className="flex flex-col items-center justify-center mb-16 text-center">
+        <h2 className="font-headline font-bold text-4xl md:text-5xl tracking-tight text-on-surface uppercase flex items-center gap-4">
+          <span className="text-primary text-3xl hidden md:inline">➔</span>
+          MENU FAVORIT
+          <span className="text-primary text-3xl hidden md:inline">🡄</span>
+        </h2>
       </div>
 
-      {/* Product Grid — scrollable on mobile, grid on desktop */}
-      <div
-        ref={scrollRef}
-        className="flex lg:grid lg:grid-cols-4 gap-x-8 gap-y-16 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 snap-x snap-mandatory scrollbar-hide pt-10"
-        style={{ scrollbarWidth: "none" }}
-      >
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {(limit ? displayProducts.slice(0, limit) : displayProducts).map((product) => (
           <div
             key={product.id}
-            className="min-w-[260px] sm:min-w-[280px] lg:min-w-0 snap-start"
+            onClick={() => {
+              if (product.id === "risol-mix") {
+                setIsMixModalOpen(true);
+              }
+            }}
+            className={product.id === "risol-mix" ? "cursor-pointer" : ""}
           >
             <ProductCard product={product} />
           </div>
         ))}
       </div>
+
+      {/* Bottom CTA */}
+      {!limit && (
+        <div className="mt-16 flex justify-center">
+          <a
+            href="#home"
+            className="inline-flex justify-center items-center h-14 px-8 rounded-full bg-primary text-white font-bold text-sm uppercase tracking-wider hover:bg-primary-dim transition-colors shadow-lg"
+          >
+            KEMBALI KE ATAS <span className="material-symbols-outlined ml-2 text-sm">arrow_upward</span>
+          </a>
+        </div>
+      )}
+
+      {/* Modal for Mix Packages */}
+      <MixVariantModal
+        isOpen={isMixModalOpen}
+        onClose={() => setIsMixModalOpen(false)}
+        onConfirm={(selections) => {
+          const mixProduct = PRODUCTS.find((p) => p.id === "risol-mix");
+          if (mixProduct) {
+            // Reconstruct selections to pass as notes or items if needed
+            // Our current CartContext allows adding original or frozen.
+            // For now, default to ori for mix to match previous simplified logic.
+            addToCart(mixProduct.id, "ori");
+          }
+          setIsMixModalOpen(false);
+        }}
+      />
     </section>
   );
 }

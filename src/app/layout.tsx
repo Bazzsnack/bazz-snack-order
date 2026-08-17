@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Manrope } from "next/font/google";
+import { Plus_Jakarta_Sans, Manrope, Oswald } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import { CartSidebarProvider } from "@/context/CartSidebarContext";
 import Navbar from "@/components/Navbar";
@@ -8,9 +8,16 @@ import StickyCheckoutBar from "@/components/StickyCheckoutBar";
 import CartSidebarWrapper from "@/components/CartSidebarWrapper";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const oswald = Oswald({
   subsets: ["latin"],
   variable: "--font-headline",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
@@ -201,7 +208,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${plusJakarta.variable} ${manrope.variable} dark antialiased`}
+      className={`${oswald.variable} ${plusJakarta.variable} ${manrope.variable} dark antialiased`}
     >
       <head>
         <link

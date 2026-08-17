@@ -1,96 +1,103 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #ff8f70;
-  --color-primary-dim: #ff734c;
-  --color-primary-fixed: #ff7852;
-  --color-primary-fixed-dim: #ff5d2e;
-  --color-primary-container: #ff7852;
-  --color-on-primary: #5c1300;
-  --color-on-primary-fixed: #000000;
-  --color-on-primary-container: #480d00;
-  --color-on-primary-fixed-variant: #581200;
+  /* Primary: Deep Red (Burger Bite style) */
+  --color-primary: #b91c1c;
+  --color-primary-dim: #991b1b;
+  --color-primary-fixed: #fca5a5;
+  --color-primary-fixed-dim: #f87171;
+  --color-primary-container: #fef2f2;
+  --color-on-primary: #ffffff;
+  --color-on-primary-fixed: #450a0a;
+  --color-on-primary-container: #7f1d1d;
+  --color-on-primary-fixed-variant: #991b1b;
 
-  --color-secondary: #fd8b00;
-  --color-secondary-dim: #ed8200;
-  --color-secondary-fixed: #ffc69a;
-  --color-secondary-fixed-dim: #ffb375;
-  --color-secondary-container: #904d00;
-  --color-on-secondary: #442100;
-  --color-on-secondary-fixed: #532a00;
-  --color-on-secondary-fixed-variant: #7c4100;
-  --color-on-secondary-container: #fff6f1;
+  /* Secondary: Bright Orange/Red for accents */
+  --color-secondary: #dc2626;
+  --color-secondary-dim: #b91c1c;
+  --color-secondary-fixed: #fecaca;
+  --color-secondary-fixed-dim: #f87171;
+  --color-secondary-container: #fef2f2;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-fixed: #450a0a;
+  --color-on-secondary-fixed-variant: #7f1d1d;
+  --color-on-secondary-container: #7f1d1d;
 
-  --color-tertiary: #eaa5ff;
-  --color-tertiary-dim: #d187e9;
-  --color-tertiary-fixed: #e094f8;
-  --color-tertiary-fixed-dim: #d187e9;
-  --color-tertiary-container: #e094f8;
-  --color-on-tertiary: #5d1877;
-  --color-on-tertiary-fixed: #2d003e;
-  --color-on-tertiary-fixed-variant: #5c1675;
-  --color-on-tertiary-container: #52076c;
+  /* Tertiary: Gold/Yellow for warnings or special highlights */
+  --color-tertiary: #d97706;
+  --color-tertiary-dim: #b45309;
+  --color-tertiary-fixed: #fde68a;
+  --color-tertiary-fixed-dim: #fcd34d;
+  --color-tertiary-container: #fffbeb;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-fixed: #78350f;
+  --color-on-tertiary-fixed-variant: #92400e;
+  --color-on-tertiary-container: #b45309;
 
-  --color-error: #ff716c;
-  --color-error-dim: #d7383b;
-  --color-error-container: #9f0519;
-  --color-on-error: #490006;
-  --color-on-error-container: #ffa8a3;
+  --color-error: #ef4444;
+  --color-error-dim: #dc2626;
+  --color-error-container: #fee2e2;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #991b1b;
 
-  --color-surface: #0e0e0e;
-  --color-surface-dim: #0e0e0e;
-  --color-surface-bright: #2c2c2c;
-  --color-surface-tint: #ff8f70;
-  --color-surface-variant: #262626;
-  --color-surface-container: #1a1a1a;
-  --color-surface-container-low: #131313;
-  --color-surface-container-high: #20201f;
-  --color-surface-container-highest: #262626;
-  --color-surface-container-lowest: #000000;
-  --color-on-surface: #ffffff;
-  --color-on-surface-variant: #adaaaa;
-  --color-on-background: #ffffff;
-  --color-background: #0e0e0e;
+  /* Surfaces: Light Theme */
+  --color-surface: #ffffff;
+  --color-surface-dim: #f9fafb;
+  --color-surface-bright: #ffffff;
+  --color-surface-tint: #b91c1c;
+  --color-surface-variant: #f3f4f6;
+  --color-surface-container: #f9fafb;
+  --color-surface-container-low: #ffffff;
+  --color-surface-container-high: #e5e7eb;
+  --color-surface-container-highest: #d1d5db;
+  --color-surface-container-lowest: #ffffff;
+  
+  --color-on-surface: #111827;
+  --color-on-surface-variant: #4b5563;
+  --color-on-background: #111827;
+  --color-background: #fdfdfd;
 
-  --color-outline: #767575;
-  --color-outline-variant: #484847;
+  --color-outline: #d1d5db;
+  --color-outline-variant: #e5e7eb;
 
-  --color-inverse-surface: #fcf9f8;
-  --color-inverse-on-surface: #565555;
-  --color-inverse-primary: #b22e00;
+  --color-inverse-surface: #111827;
+  --color-inverse-on-surface: #f9fafb;
+  --color-inverse-primary: #fca5a5;
 
-  --font-headline: "Plus Jakarta Sans", sans-serif;
+  --font-headline: "Oswald", sans-serif;
   --font-body: "Manrope", sans-serif;
   --font-label: "Manrope", sans-serif;
 }
 
 /* Custom Utilities */
 .liquid-fire {
-  background-image: linear-gradient(135deg, #ff7852 0%, #fd8b00 100%);
+  background-image: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
 }
 
 .glass-nav {
-  background: rgba(14, 14, 14, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .glass-dock {
-  background: rgba(26, 26, 26, 0.6);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .snack-card-shadow {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .active-glow {
-  box-shadow: 0 0 20px rgba(255, 143, 112, 0.2);
+  box-shadow: 0 0 20px rgba(185, 28, 28, 0.2);
 }
 
 .ambient-shadow {
-  box-shadow: 0 20px 40px rgba(255, 115, 76, 0.15);
+  box-shadow: 0 10px 30px rgba(185, 28, 28, 0.25);
 }
 
 .material-symbols-outlined {

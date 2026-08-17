@@ -1,197 +1,72 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { useCart, FROZEN_MIN_QTY } from "@/context/CartContext";
-import type { Product } from "@/data/products";
-import MixVariantModal from "./MixVariantModal";
+import { Product } from "@/data/products";
+import { useCart } from "@/context/CartContext";
 
-type ProductCardProps = {
-  product: Product;
-};
+export default function ProductCard({ product }: { product: Product }) {
+  const { addToCart } = useCart();
+  const isMixPackage = product.id === "risol-mix";
 
-export default function ProductCard({ product }: ProductCardProps) {
-  const { getQuantity, increment, decrement, addToCart } = useCart();
-  const [selectedVariant, setSelectedVariant] = useState<"ori" | "frozen">(
-    product.onlyFrozen ? "frozen" : "ori"
-  );
-  
-  const [isMixModalOpen, setIsMixModalOpen] = useState(false);
-
-  const quantity = getQuantity(product.id, selectedVariant);
-  const isFrozen = selectedVariant === "frozen";
-  const frozenMinQty = product.frozenBundle?.minQty ?? FROZEN_MIN_QTY;
-  const frozenPackPrice = product.frozenBundle?.packPrice ?? (frozenMinQty * product.price);
+  const handleAdd = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isMixPackage) {
+      // Trigger modal logic by simulating a click on the card, or handle it via a context
+      // Since clicking the card already does this in the current setup, we just let the parent handle it
+    } else {
+      addToCart(product.id, "ori");
+    }
+  };
 
   return (
-    <div className="flex flex-col h-full bg-surface-container-low rounded-3xl p-4 sm:p-6 relative group snack-card-shadow transition-all duration-300 hover:translate-y-[-8px]">
-      {/* Product Image */}
-      <div className="h-40 sm:h-48 mb-6 relative z-10 overflow-hidden rounded-2xl flex items-center justify-center">
-        {Array.isArray(product.image) ? (
-          <div className="relative w-full h-full flex items-center justify-center">
-            {product.image.map((img, i) => {
-              const rotations = [
-                "-rotate-[15deg] -translate-x-6 translate-y-2 z-0 group-hover:-rotate-[25deg] group-hover:-translate-x-10",
-                "rotate-0 z-10 group-hover:-translate-y-4 shadow-xl",
-                "rotate-[15deg] translate-x-6 translate-y-2 z-20 group-hover:rotate-[25deg] group-hover:translate-x-10"
-              ];
-              return (
-                <div
-                  key={i}
-                  className={`absolute w-[55%] h-[85%] sm:w-[50%] sm:h-[90%] transition-all duration-500 origin-bottom ${rotations[i]}`}
-                >
-                  <Image
-                    src={img}
-                    alt={`${product.name} ${i + 1}`}
-                    fill
-                    className="object-cover rounded-xl shadow-2xl border-[3px] border-surface-container-low"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                </div>
-              );
-            })}
-          </div>
-        ) : (
+    <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-outline-variant hover:shadow-xl transition-shadow group flex flex-col h-full relative cursor-pointer">
+      {/* Badge */}
+      {product.badge && (
+        <div className="absolute top-4 left-4 z-10 bg-primary text-white text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-wider shadow-md">
+          {product.badge}
+        </div>
+      )}
+
+      {/* Image Area */}
+      <div className="relative h-48 w-full bg-surface-variant rounded-t-3xl overflow-hidden p-4">
+        {/* Decorative shadow inside the image area */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
+        <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-500 z-0">
           <Image
-            src={product.image}
+            src={Array.isArray(product.image) ? product.image[0] : product.image}
             alt={product.name}
             fill
-            className={`object-cover rounded-2xl shadow-xl transform transition-transform duration-500 ${
-              product.id === "dimsum-keju" ? "scale-[1.3] group-hover:scale-[1.4]" : "group-hover:scale-105"
-            }`}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-contain drop-shadow-xl"
           />
-        )}
-        {product.badge && (
-          <div
-            className={`absolute z-50 top-2 right-2 ${product.badgeColor ?? "bg-primary"} px-3 py-1 rounded-full text-on-primary font-bold text-xs uppercase tracking-tighter`}
-          >
-            {product.badge}
-          </div>
-        )}
+        </div>
       </div>
 
-      {/* Product Details */}
-      <div className="flex flex-col flex-1 space-y-4">
-        <div className="flex justify-between items-start">
-          <h3 className="font-headline font-bold text-xl">{product.name}</h3>
-          <span className="text-primary font-black text-lg shrink-0 ml-2">
-            {product.displayPrice}
-          </span>
-        </div>
-
-        <p className="text-on-surface-variant text-sm line-clamp-2">
+      {/* Text Area */}
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="font-headline font-bold text-xl text-on-surface uppercase mb-2">
+          {product.name}
+        </h3>
+        <p className="text-on-surface-variant text-sm flex-grow mb-4 leading-relaxed">
           {product.description}
         </p>
 
-        <div className="flex-1"></div>
-
-        {/* Variant Selector */}
-        {product.hasFrozen && (
-          <div className="flex flex-col gap-2">
-            {!product.onlyFrozen && (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setSelectedVariant("ori")}
-                  className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
-                    selectedVariant === "ori"
-                      ? "bg-primary text-on-primary border-primary"
-                      : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
-                  }`}
-                >
-                  Original
-                </button>
-                <button
-                  onClick={() => setSelectedVariant("frozen")}
-                  className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer ${
-                    selectedVariant === "frozen"
-                      ? "bg-secondary text-secondary-container border-secondary"
-                      : "bg-surface-container-highest text-on-surface-variant border-transparent hover:border-outline-variant/30"
-                  }`}
-                >
-                  ❄️ Frozen
-                </button>
-              </div>
-            )}
-
-            {/* Frozen info badge — only shows when Frozen is selected (except for Mix Package) */}
-            <div
-              className={`overflow-hidden transition-all duration-300 ease-out ${
-                isFrozen && product.id !== "risol-mix" ? "max-h-12 opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/10 border border-secondary/20">
-                <span className="material-symbols-outlined text-secondary text-sm">
-                  info
-                </span>
-                <span className="text-[11px] text-secondary font-medium">
-                  Min. {frozenMinQty} pcs · Mulai Rp {(frozenPackPrice / 1000).toFixed(0)}k
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Quantity Controls + Add to Cart */}
-        <div className="flex items-center justify-between pt-1">
-          {product.id === "risol-mix" ? (
-            <button
-              onClick={() => setIsMixModalOpen(true)}
-              className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-on-primary py-2.5 rounded-xl font-bold transition-all cursor-pointer"
-            >
-              Pesan Mix {selectedVariant === "frozen" ? "Frozen" : "Original"}
-            </button>
-          ) : (
-            <>
-              {/* Stepper */}
-              <div className="flex items-center bg-surface-container-highest rounded-full p-1 border border-outline-variant/10">
-                <button
-                  onClick={() => decrement(product.id, selectedVariant)}
-                  className="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
-                  aria-label={`Decrease ${product.name} ${selectedVariant}`}
-                >
-                  <span className="material-symbols-outlined text-sm">
-                    {/* Show delete icon when at 1 frozen qty to hint removal */}
-                    {isFrozen && quantity === 1 ? "delete" : "remove"}
-                  </span>
-                </button>
-                <span className="w-8 text-center text-sm font-bold tabular-nums">
-                  {isFrozen && quantity > 0 ? `${quantity} Box` : quantity}
-                </span>
-                <button
-                  onClick={() => increment(product.id, selectedVariant)}
-                  className="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors cursor-pointer"
-                  aria-label={`Increase ${product.name} ${selectedVariant}`}
-                >
-                  <span className="material-symbols-outlined text-sm">add</span>
-                </button>
-              </div>
-
-              {/* Add to Cart Button */}
-              <button
-                onClick={() => addToCart(product.id, selectedVariant)}
-                className="bg-primary/10 hover:bg-primary text-primary hover:text-on-primary w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 cursor-pointer"
-                aria-label={`Add ${product.name} ${selectedVariant} to cart`}
-              >
-                <span className="material-symbols-outlined">add_shopping_cart</span>
-              </button>
-            </>
-          )}
+        {/* Footer (Price & Button) */}
+        <div className="flex items-center justify-between mt-auto">
+          <span className="font-headline font-bold text-2xl text-primary">
+            {product.displayPrice}
+          </span>
+          <button
+            onClick={handleAdd}
+            className="w-10 h-10 rounded-full border-2 border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+            aria-label="Tambah ke keranjang"
+          >
+            <span className="material-symbols-outlined text-xl font-bold">
+              {isMixPackage ? "tune" : "add"}
+            </span>
+          </button>
         </div>
       </div>
-
-      <MixVariantModal
-        isOpen={isMixModalOpen}
-        onClose={() => setIsMixModalOpen(false)}
-        onConfirm={(selections) => {
-          // Convert record to string format: "risol-coklat:2,risol-mayo:3"
-          const mixString = Object.entries(selections)
-            .filter(([_, qty]) => qty > 0)
-            .map(([id, qty]) => `${id}:${qty}`)
-            .join(",");
-          addToCart(product.id, "frozen", mixString);
-        }}
-      />
     </div>
   );
 }

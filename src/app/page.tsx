@@ -1,7 +1,7 @@
 "use client";
 
 import HeroSection from "@/components/HeroSection";
-import TrustBanner from "@/components/TrustBanner";
+import PromoBanner from "@/components/PromoBanner";
 import ProductSection from "@/components/ProductSection";
 import ReviewsSection from "@/components/ReviewsSection";
 
@@ -10,7 +10,7 @@ export default function Home() {
     <main className="pt-20 pb-32">
       <div id="home">
         <HeroSection />
-        <TrustBanner />
+        <PromoBanner />
       </div>
       
       <div id="menu">
