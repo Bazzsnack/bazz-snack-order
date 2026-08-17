@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Primary: Deep Red (Burger Bite style) */
-  --color-primary: #b91c1c;
-  --color-primary-dim: #991b1b;
-  --color-primary-fixed: #fca5a5;
-  --color-primary-fixed-dim: #f87171;
-  --color-primary-container: #fef2f2;
+  /* Primary: Orange-Red */
+  --color-primary: #e6571e;
+  --color-primary-dim: #c94a18;
+  --color-primary-fixed: #fdba9b;
+  --color-primary-fixed-dim: #f78c5a;
+  --color-primary-container: #fff4ed;
   --color-on-primary: #ffffff;
-  --color-on-primary-fixed: #450a0a;
-  --color-on-primary-container: #7f1d1d;
-  --color-on-primary-fixed-variant: #991b1b;
+  --color-on-primary-fixed: #4a1a04;
+  --color-on-primary-container: #7c2d0e;
+  --color-on-primary-fixed-variant: #c94a18;
 
-  /* Secondary: Bright Orange/Red for accents */
-  --color-secondary: #dc2626;
-  --color-secondary-dim: #b91c1c;
-  --color-secondary-fixed: #fecaca;
-  --color-secondary-fixed-dim: #f87171;
-  --color-secondary-container: #fef2f2;
+  /* Secondary: Deeper Orange for accents */
+  --color-secondary: #f06824;
+  --color-secondary-dim: #e6571e;
+  --color-secondary-fixed: #fdd0b5;
+  --color-secondary-fixed-dim: #f78c5a;
+  --color-secondary-container: #fff4ed;
   --color-on-secondary: #ffffff;
-  --color-on-secondary-fixed: #450a0a;
-  --color-on-secondary-fixed-variant: #7f1d1d;
-  --color-on-secondary-container: #7f1d1d;
+  --color-on-secondary-fixed: #4a1a04;
+  --color-on-secondary-fixed-variant: #7c2d0e;
+  --color-on-secondary-container: #7c2d0e;
 
   /* Tertiary: Gold/Yellow for warnings or special highlights */
   --color-tertiary: #d97706;
@@ -44,7 +44,7 @@
   --color-surface: #ffffff;
   --color-surface-dim: #f9fafb;
   --color-surface-bright: #ffffff;
-  --color-surface-tint: #b91c1c;
+  --color-surface-tint: #e6571e;
   --color-surface-variant: #f3f4f6;
   --color-surface-container: #f9fafb;
   --color-surface-container-low: #ffffff;
@@ -62,7 +62,7 @@
 
   --color-inverse-surface: #111827;
   --color-inverse-on-surface: #f9fafb;
-  --color-inverse-primary: #fca5a5;
+  --color-inverse-primary: #fdba9b;
 
   --font-headline: "Oswald", sans-serif;
   --font-body: "Manrope", sans-serif;
@@ -71,7 +71,7 @@
 
 /* Custom Utilities */
 .liquid-fire {
-  background-image: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+  background-image: linear-gradient(135deg, #e6571e 0%, #f06824 100%);
 }
 
 .glass-nav {
@@ -93,11 +93,11 @@
 }
 
 .active-glow {
-  box-shadow: 0 0 20px rgba(185, 28, 28, 0.2);
+  box-shadow: 0 0 20px rgba(230, 87, 30, 0.2);
 }
 
 .ambient-shadow {
-  box-shadow: 0 10px 30px rgba(185, 28, 28, 0.25);
+  box-shadow: 0 10px 30px rgba(230, 87, 30, 0.25);
 }
 
 .material-symbols-outlined {
