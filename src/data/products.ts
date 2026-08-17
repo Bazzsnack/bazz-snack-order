@@ -23,7 +23,7 @@ export const products: Product[] = [
     price: 15000,
     displayPrice: "Rp 15k / 5 pcs",
     description: "Nikmati berbagai pilihan rasa risoles favoritmu (bisa di-mix) dalam satu box yang menggugah selera.",
-    image: "/gambar_produk/risol-new.png",
+    image: "/produk-tumbhnail/RISOL.jpg",
     hasFrozen: true,
   },
   {
@@ -73,7 +73,7 @@ export const products: Product[] = [
     displayPrice: "Rp 10k",
     description:
       "Kebab lezat dengan isian daging gurih dan saus spesial, dibalut tortilla lembut. Harga Rp 10.000 dapat 3 kebab.",
-    image: "/gambar_produk/kebab.png",
+    image: "/produk-tumbhnail/KEBAB.jpg",
     hasFrozen: true,
   },
   {
@@ -83,7 +83,7 @@ export const products: Product[] = [
     displayPrice: "Rp 10k",
     description:
       "Paket praktis Dimsum Box isi 10 pcs, include dengan 2 saus lezat dan sumpit, siap disajikan dan dinikmati.",
-    image: "/gambar_produk/dimsum-box.png",
+    image: "/produk-tumbhnail/DIMSUM_BOX.jpg",
     hasFrozen: true,
     frozenBundle: {
       minQty: 1,
@@ -97,7 +97,7 @@ export const products: Product[] = [
     displayPrice: "Rp 10k",
     description:
       "Dimsum ayam gurih dengan topping keju leleh yang lumer di mulut. Harga Rp 10.000 dapat 5 pcs include sauce.",
-    image: "/gambar_produk/dimsum-keju.png",
+    image: "/produk-tumbhnail/DIMSUM_KEJU.jpg",
     hasFrozen: true,
   },
   {
@@ -107,7 +107,7 @@ export const products: Product[] = [
     displayPrice: "Rp 25k",
     description:
       "Dimsum ayam kukus premium yang diselimuti saus mentai racikan rahasia, dibakar (di-torch) hingga menghasilkan aroma smokey yang wangi dan lumer di mulut.",
-    image: "/gambar_produk/dimsum-mentai.png",
+    image: "/produk-tumbhnail/DIMSUM_MENTAI.jpg",
   },
   {
     id: "bakaran",
@@ -116,6 +116,6 @@ export const products: Product[] = [
     displayPrice: "Rp 10k",
     description:
       "Harga Rp 10.000 dapat 4 tusuk bakaran kenyal yang dibakar di atas arang hingga gosong sempurna, dilumuri bumbu kacang dan kecap manis.",
-    image: "/gambar_produk/bakaran.png",
+    image: "/produk-tumbhnail/BAKARAN.jpg",
   },
 ];
