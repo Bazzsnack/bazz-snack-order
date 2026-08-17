@@ -3,9 +3,37 @@
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
+// Deterministic pseudo-random path generator for torn paper effect
+const getTornPath = (seed: number, segments: number, baseHeight: number, variance: number) => {
+  let d = `M0,30 `;
+  for (let i = 0; i <= segments; i++) {
+    const x = (i / segments) * 1000;
+    const rand = Math.sin(seed * (i + 1) * 12.9898) * 43758.5453;
+    const noise = rand - Math.floor(rand);
+    const newY = baseHeight + (noise * 2 - 1) * variance;
+    d += `L${x.toFixed(1)},${newY.toFixed(1)} `;
+  }
+  d += `L1000,30 Z`;
+  return d;
+};
+
+const TornEdge = () => (
+  <div className="absolute top-0 left-0 w-full h-8 sm:h-12 -translate-y-[99%] overflow-hidden pointer-events-none">
+    {/* Orange torn border layer */}
+    <svg viewBox="0 0 1000 30" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full text-primary fill-current drop-shadow-sm">
+      <path d={getTornPath(1.23, 180, 12, 10)} />
+    </svg>
+    {/* Dark gray footer layer overlapping */}
+    <svg viewBox="0 0 1000 30" preserveAspectRatio="none" className="absolute bottom-[-1px] w-full h-[80%] text-[#1A1A1A] fill-current drop-shadow-md">
+      <path d={getTornPath(4.56, 220, 14, 8)} />
+    </svg>
+  </div>
+);
+
 export default function Footer() {
   return (
-    <footer className="relative bg-[#1A1A1A] w-full pt-16 pb-8 border-t-[8px] border-primary">
+    <footer className="relative bg-[#1A1A1A] w-full pt-16 pb-8 mt-12">
+      <TornEdge />
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8 mb-12">
