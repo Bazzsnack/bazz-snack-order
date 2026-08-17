@@ -57,7 +57,7 @@ export default function ProductSection({ limit }: { limit?: number }) {
         className="flex lg:grid lg:grid-cols-4 gap-x-8 gap-y-16 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 snap-x snap-mandatory scrollbar-hide pt-10"
         style={{ scrollbarWidth: "none" }}
       >
-        {(limit ? PRODUCTS.slice(0, limit) : PRODUCTS).map((product) => (
+        {(limit ? displayProducts.slice(0, limit) : displayProducts).map((product) => (
           <div
             key={product.id}
             className="min-w-[260px] sm:min-w-[280px] lg:min-w-0 snap-start"
