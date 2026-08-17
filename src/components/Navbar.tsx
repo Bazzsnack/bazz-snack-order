@@ -22,9 +22,11 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      setIsScrolled(scrollPos > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Check initial scroll position
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -32,7 +34,7 @@ export default function Navbar() {
     <nav
       id="navbar"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "glass-nav shadow-sm py-0" : "bg-transparent py-2"
+        isScrolled ? "bg-white/75 backdrop-blur-md shadow-sm border-b border-black/5 py-0" : "bg-transparent py-2"
       }`}
     >
       <div className="flex justify-between items-center h-20 px-6 max-w-7xl mx-auto w-full font-headline tracking-tight relative bg-transparent">
