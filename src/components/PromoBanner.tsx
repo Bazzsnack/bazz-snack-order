@@ -20,7 +20,9 @@ export default function PromoBanner() {
           {/* Posisi disesuaikan agar rata kanan (right-aligned) mengikuti ujung teks */}
           <div className="absolute top-[78%] sm:top-[72%] lg:top-[70%] right-[5%] sm:right-[6%] lg:right-[7%] transform -translate-y-1/2">
             <a
-              href="#"
+              href="https://chat.whatsapp.com/KEXZCHCEJTU6OdCBpKPjQb"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex justify-center items-center h-10 sm:h-12 lg:h-14 px-6 sm:px-8 lg:px-10 rounded-full bg-primary text-white font-bold text-xs sm:text-sm lg:text-base uppercase tracking-wider hover:bg-orange-600 hover:scale-105 hover:shadow-xl transition-all duration-300 shadow-lg shadow-primary/30"
             >
               JOIN NOW
