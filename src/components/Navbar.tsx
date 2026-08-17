@@ -41,7 +41,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="#home"
-          className="relative flex items-center shrink-0 w-48 sm:w-64 h-16 sm:h-20 origin-left transition-transform active:scale-95 z-10"
+          className="relative flex items-center shrink-0 w-40 sm:w-52 h-14 origin-left transition-transform active:scale-95 z-10"
         >
           <Image
             src="/images/logo-new.png"
@@ -71,7 +71,7 @@ export default function Navbar() {
         {/* Actions (Cart + Hamburger) */}
         <div className="flex items-center gap-4 z-10">          <button
             onClick={openSidebar}
-            className="relative p-2 text-gray-700 hover:text-primary transition-colors flex items-center justify-center"
+            className="relative p-2 text-gray-700 hover:text-primary transition-colors flex items-center justify-center bg-gray-100 rounded-full"
             aria-label="Keranjang Belanja"
           >
             <span className="material-symbols-outlined text-2xl">
