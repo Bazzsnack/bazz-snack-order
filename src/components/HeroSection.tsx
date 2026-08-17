@@ -29,18 +29,18 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 w-full">
-            <Link
-              href="/#menu"
+            <a
+              href="#menu"
               className="liquid-fire w-full sm:w-auto text-center text-on-primary-fixed font-bold px-8 py-4 rounded-xl ambient-shadow hover:scale-105 active:scale-95 transition-transform"
             >
               Order Sekarang
-            </Link>
-            <Link
-              href="/#menu"
+            </a>
+            <a
+              href="#menu"
               className="w-full sm:w-auto text-center px-8 py-4 rounded-xl border border-outline-variant/30 text-primary font-bold hover:bg-surface-container-low transition-all"
             >
               Lihat Menu
-            </Link>
+            </a>
           </div>
         </div>
 
