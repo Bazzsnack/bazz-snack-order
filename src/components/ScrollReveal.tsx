@@ -13,7 +13,7 @@ interface ScrollRevealProps {
 export default function ScrollReveal({
   children,
   className = "",
-  animationClass = "animate-slide-up",
+  animationClass = "animate-fade-in-card",
   threshold = 0.1,
   delay = 0,
 }: ScrollRevealProps) {
