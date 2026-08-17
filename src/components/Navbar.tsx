@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,10 +18,22 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <nav
       id="navbar"
-      className="fixed top-0 w-full z-50 glass-nav"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? "glass-nav shadow-sm py-0" : "bg-transparent py-2"
+      }`}
     >
       <div className="flex justify-between items-center h-20 px-6 max-w-7xl mx-auto w-full font-headline tracking-tight relative bg-transparent">
         {/* Logo */}
@@ -39,7 +51,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-8 z-10">
+        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 z-10">
           {NAV_LINKS.map((link) => {
             // For a single page app, active state based on pathname isn't very useful unless we track scroll.
             // Removing strict border-b-2 for now to avoid it always being stuck on Beranda.
