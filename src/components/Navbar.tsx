@@ -34,7 +34,7 @@ export default function Navbar() {
     <nav
       id="navbar"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/75 backdrop-blur-md shadow-sm border-b border-black/5 py-0" : "bg-transparent py-2"
+        isScrolled ? "bg-white/75 backdrop-blur-md shadow-sm py-0" : "bg-transparent py-2"
       }`}
     >
       <div className="flex justify-between items-center h-20 px-6 max-w-7xl mx-auto w-full font-headline tracking-tight relative bg-transparent">
